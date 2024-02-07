@@ -1,0 +1,61 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    <h1>Créez votre compte</h1>
+
+    <form action="" method="post">
+
+        <div>
+            <label for="email">Email</label>
+            <input 
+                type="email"
+                name="email"
+                required="required"
+                id="email"
+                placeholder="Entrez votre email"
+            />
+        </div>
+
+        <div>
+            <label for="email_cfg">Email confirmation</label>
+            <input 
+                type="email"
+                name="email_cfg"
+                required="required"
+                id="email_cfg"
+                placeholder="Confirmez votre email"
+            />
+        </div>
+
+                <div>
+            <label for="password">Mot de passe</label>
+            <input 
+                type="password"
+                name="password"
+                required="required"
+                id="password"
+                placeholder="Entrez votre mot de passe"
+            />
+        </div>
+
+        <div>
+            <label for="password_cfg">Mot de passe confirmation</label>
+            <input 
+                type="password"
+                name="password_cfg"
+                required="required"
+                id="password_cfg"
+                placeholder="Confirmez le mot de passe"
+            />
+        </div>
+
+        <div>
+            <input type="submit" name="send" value="Créer le compte" />
+        </div>
+
+    </form>
+
+    <p>
+        <a href="index.php">Déjà un compte ?</a>
+    </p>
+{% endblock %}

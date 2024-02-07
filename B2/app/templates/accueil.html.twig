@@ -1,0 +1,16 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    
+    <h1>Accueil</h1>
+
+    {% if isStandardiste %}
+        <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
+    {% endif %}
+    {% if isAdmin %}
+        <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
+    {% endif %}
+
+    <p><a href="logout.php">Déconnexion</a></p>
+
+{% endblock %}

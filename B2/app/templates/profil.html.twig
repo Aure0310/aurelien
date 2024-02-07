@@ -1,0 +1,26 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/profil.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Profil</h1>
+
+        {% if msg %}
+            <div class="message">{{ msg }}</div>
+        {% endif %}
+
+       <div class="profile-info">
+            <img src="img/default-avatar.jpg" alt="Photo de profil" class="profile-picture">
+            <p><strong>Nom:</strong> {{ nom }}</p>
+            <p><strong>Prénom:</strong> {{ prenom }}</p>
+            <p><strong>Rôle:</strong> {{ role }}</p>
+            <p><strong>Adresse:</strong> {{ adresse }}</p>
+            <p><strong>Téléphone:</strong> {{ telephone }}</p>
+            <p><strong>Date de création du compte:</strong> {{ createdAt }}</p>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,94 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/administration.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <h1>Administration</h1>
+
+    <section>
+        <h2>Utilisateurs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Rôle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.role }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h2>Statuts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID_Statut</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for statut in statuts %}
+                    <tr>
+                        <td>{{ statut.ID_Statut }}</td>
+                        <td>{{ statut.Nom }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID_Type</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in types %}
+                    <tr>
+                        <td>{{ type.ID_Type }}</td>
+                        <td>{{ type.Nom }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Urgences</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID_Urgence</th>
+                    <th>Niveau</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for urgence in urgences %}
+                    <tr>
+                        <td>{{ urgence.ID_Urgence }}</td>
+                        <td>{{ urgence.Niveau }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

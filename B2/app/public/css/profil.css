@@ -1,0 +1,34 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #2A3A65;
+    text-align: center;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+}
+
+.profile-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px; 
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 1.2em; 
+}

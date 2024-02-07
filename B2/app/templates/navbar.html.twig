@@ -1,0 +1,28 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/navbar.css">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <!-- <img src="img/logo.jpg" alt="Logo" class="logo"> !-->
+        </div>
+        <div class="navbar-left">
+            <input type="text" placeholder="Rechercher" class="navbar-search">
+            {% if role == 'Admin' %}
+                <a href="administration.php" class="navbar-button">Administration</a>
+            {% endif %}
+        </div>
+        <div class="navbar-right">
+            <a href="interventions.php" class="navbar-button">Interventions</a>
+            <a href="accueil.php" class="navbar-button">Accueil</a>
+            <div class="navbar-user">
+                <a href="profil.php">
+                    {{ prenom }} {{ nom }} ({{ role }})
+                </a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

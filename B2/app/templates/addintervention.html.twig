@@ -1,0 +1,68 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/addintervention.css">
+{% endblock %}
+
+{% block body %}
+
+    <h1>Créer une intervention</h1>
+
+    <form action="addintervention.php" method="post">
+        <label for="client">Client :</label>
+            <select id="client" name="client" required>
+                {% for client in clients %}
+                    <option value="{{ client.id }}">{{ client.nom }} {{ client.prenom }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="intervenant">Intervenant :</label>
+            <select id="intervenant" name="intervenant" required>
+                {% for intervenant in intervenants %}
+                    <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                {% endfor %}
+            </select>
+
+        <label for="date">Date :</label>
+        <input type="date" name="date" required>
+
+        <label for="intervention_type">Type d'intervention :</label>
+        <select name="intervention_type" required>
+            {% for type in types %}
+                <option value="{{ type.ID_Type }}">{{ type.Nom }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="comment">Commentaire :</label>
+        <textarea name="comment" required></textarea>
+
+        <label for="intervention_statut">Statut :</label>
+        <select name="intervention_statut" required>
+            {% for statut in statuts %}
+                <option value="{{ statut.ID_Statut }}">{{ statut.Nom }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="intervention_urgence">Urgence :</label>
+        <select name="intervention_urgence" required>
+            {% for urgence in urgences %}
+                <option value="{{ urgence.ID_Urgence }}">{{ urgence.Niveau }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Créer</button>
+    </form>
+
+        {% if msg %}
+        <div class="success-message">
+            {{ msg }}
+        </div>
+        <script>
+            setTimeout(function()
+            {
+                window.location.href = 'accueil.php';
+            }, 1750);
+        </script>
+    {% endif %}
+
+{% endblock %}
