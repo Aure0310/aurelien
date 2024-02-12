@@ -1,9 +1,38 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h1>Créez votre compte</h1>
+<div class="container">
+        <img class="left-image" src="img/creeruncompte.jpg" alt="Eolienne">
+        <div class="login-container">
+            <img class="logo" src="img/logo.jpg" alt="Votre Logo"> 
+           
+       <h1>Créez votre compte</h1>
+        {% if msg %}
+                <div>{{ msg }}</div>
+            {% endif %}
 
     <form action="" method="post">
+        <div>
+            <label for="nom">Nom</label>
+            <input 
+                type="name"
+                name="nom"
+                required="required"
+                id="nom"
+                placeholder="Entrez votre nom"
+            />
+        </div>
+
+         <div>
+            <label for="prenom">Prenom</label>
+            <input 
+                type="name"
+                name="prenom"
+                required="required"
+                id="prenom"
+                placeholder="Entrez votre prenom"
+            />
+        </div>
 
         <div>
             <label for="email">Email</label>
@@ -58,4 +87,9 @@
     <p>
         <a href="index.php">Déjà un compte ?</a>
     </p>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/register.css">
 {% endblock %}

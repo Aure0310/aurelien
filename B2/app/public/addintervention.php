@@ -19,10 +19,13 @@ if ($page->session->isConnected()) {
     }
 }
 
+// Vérifie si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Vérifie si les clés existent dans $_POST avant de les utiliser
     $client_id = isset($_POST['client']) ? $_POST['client'] : null;
     $intervenant_id = isset($_POST['intervenant']) ? $_POST['intervenant'] : null;
 
+    // Préparez les données pour l'insertion
     $data = [
         'ID_Client' => $client_id,
         'ID_Intervenant' => $intervenant_id,
@@ -33,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ID_Urgence' => $_POST['intervention_urgence'],
     ];
 
+    // Insérez l'intervention dans la base de données
     $page->insertIntervention($data);
 
     $msg = 'Intervention créée avec succès!';

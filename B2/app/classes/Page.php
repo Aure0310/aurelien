@@ -27,7 +27,7 @@ class Page
 
     public function insert(string $table_name, array $data)
     {
-        $sql = 'INSERT INTO ' . $table_name . ' (email, password) VALUES (:email, :password)';
+        $sql = 'INSERT INTO ' . $table_name . ' (email, password, nom, prenom) VALUES (:email, :password, :nom, :prenom)';
         $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
         $sth->execute($data);
     }
@@ -66,11 +66,11 @@ class Page
 
     public function getAllIntervenants()
     {
-        $sql = "SELECT * FROM users WHERE role IN ('Intervenant') ORDER BY Nom, Prenom";
+        $sql = "SELECT * FROM users WHERE role = 'Standardiste' ORDER BY Nom, Prenom";
         $sth = $this->link->query($sql);
+        $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
 
     public function getAllStatuts()
     {
@@ -96,6 +96,7 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
     public function insertIntervention(array $data)
     {
         $sql = 'INSERT INTO Intervention (ID_Client, ID_Intervenant, Date, Commentaire, ID_Type, ID_Statut, ID_Urgence) VALUES (:ID_Client, :ID_Intervenant, :Date, :Commentaire, :ID_Type, :ID_Statut, :ID_Urgence)';
@@ -103,30 +104,6 @@ class Page
         $sth->execute($data);
     }
 
-    public function getInterventionsByUser($userId)
-    {
-        $sql = "
-            SELECT 
-                Intervention.*,
-                Type.Nom AS Type,
-                Statut.Nom AS Statut,
-                Urgence.Niveau AS Urgence
-            FROM 
-                Intervention
-                JOIN Type ON Intervention.ID_Type = Type.ID_Type
-                JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
-                JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
-            WHERE 
-                ID_Client = :userId OR ID_Intervenant = :userId 
-            ORDER BY 
-                Date DESC
-        ";
-    
-        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-        $sth->execute(['userId' => $userId]);
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
-    }
-      
 
     public function render(string $name, array $data) :string
     {
