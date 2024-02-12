@@ -1,0 +1,40 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/interventions.css">
+{% endblock %}
+
+{% block body %}
+    <h1>Interventions</h1>
+
+    {% if interventions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Statut</th>
+                    <th>Urgence</th>
+                    <th>Commentaire</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for intervention in interventions %}
+                    <tr>
+                        <td>{{ intervention.Date|date("d/m/Y") }}</td>
+                        <td>{{ intervention.Type }}</td>
+                        <td>{{ intervention.Statut }}</td>
+                        <td>{{ intervention.Urgence }}</td>
+                        <td>{{ intervention.Commentaire }}</td>
+                        <td>
+                            <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune intervention attribuée.</p>
+    {% endif %}
+{% endblock %}
