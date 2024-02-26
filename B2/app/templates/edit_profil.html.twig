@@ -1,0 +1,16 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <h1>Modifier Profil</h1>
+    <form action="update_edit_profil.php" method="post">
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <div><label>Nom: <input type="text" name="nom" value="{{ user.nom }}"></label></div>
+        <div><label>Prénom: <input type="text" name="prenom" value="{{ user.prenom }}"></label></div>
+        <div><label>Adresse: <input type="text" name="adresse" value="{{ user.adresse }}"></label></div>
+        <div><label>Telephone: <input type="text" name="telephone" value="{{ user.telephone }}"></label></div>
+        <!-- Ajoutez d'autres champs ici selon vos besoins -->
+        <div><button type="submit">Sauvegarder</button></div>
+    </form>
+</div>
+{% endblock %}

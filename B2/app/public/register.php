@@ -15,7 +15,9 @@ if(isset($_POST['send'])) {
             'email'     => $_POST['email'],
             'password'  => $hashedPassword,
             'nom'       => $_POST['nom'],
-            'prenom'    => $_POST['prenom']
+            'prenom'    => $_POST['prenom'],
+            'adresse'    => $_POST['adresse'],
+            'telephone'    => $_POST['telephone']
         ]);
 
         if ($inserted) {

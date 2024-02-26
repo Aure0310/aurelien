@@ -11,6 +11,7 @@
         {% if msg %}
             <div class="message">{{ msg }}</div>
         {% endif %}
+        
 
        <div class="profile-info">
             <img src="img/default-avatar.jpg" alt="Photo de profil" class="profile-picture">
@@ -21,6 +22,9 @@
             <p><strong>Téléphone:</strong> {{ telephone }}</p>
             <p><strong>Date de création du compte:</strong> {{ createdAt }}</p>
         </div>
+        <div class="edit-profile">
+    <a href="edit_profil.php" class="btn btn-primary">Modifier le Profil</a>
+</div>
     </div>
 {% endblock %}
 

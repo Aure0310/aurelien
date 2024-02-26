@@ -153,4 +153,21 @@ class Page
     {
         return $this->twig->render($name, $data);
     }
+
+    public function updateUserById($id, $data)
+{
+    // Example SQL update statement - you will need to adjust this to match your database schema and include all fields you wish to update
+    $sql = "UPDATE users SET nom = :nom, prenom = :prenom, adresse = :adresse, telephone = :telephone WHERE id = :id";
+    $sth = $this->link->prepare($sql);
+    // Make sure to include all necessary fields in the execute array
+    return $sth->execute([
+        ':nom' => $data['nom'],
+        ':prenom' => $data['prenom'],
+        ':adresse' => $data['adresse'],
+        ':telephone' => $data['telephone'],
+        ':id' => $id
+    ]);
+}
+
+
 }
