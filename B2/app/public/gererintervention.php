@@ -19,18 +19,24 @@ if ($page->session->isConnected()) {
     }
 }
 
-$interventionId = isset($_GET['id']) ? $_GET['id'] : null;
+$intervention_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
-$interventionDetails = $page->getInterventionDetails($interventionId);
-$intervenants = $page->getAllIntervenants();
-$statuts = $page->getAllStatuts();
-$types = $page->getAllTypes();
-$urgences = $page->getAllUrgences();
+if ($intervention_id) {
+    $intervention = $page->getInterventionDetails($intervention_id);
+
+    if (!$intervention) {
+        exit("Intervention introuvable");
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $client_id = isset($_POST['client']) ? $_POST['client'] : null;
+    $intervenant_id = isset($_POST['intervenant']) ? $_POST['intervenant'] : null;
 
     $data = [
-        'ID_Intervenant' => $_POST['intervention_intervenant'],
+        'ID_Client' => $client_id,
+        'ID_Intervenant' => $intervenant_id,
         'Date' => $_POST['date'],
         'Commentaire' => $_POST['comment'],
         'ID_Type' => $_POST['intervention_type'],
@@ -38,10 +44,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ID_Urgence' => $_POST['intervention_urgence'],
     ];
 
-    $page->updateIntervention($interventionId, $data);
+    $intervention_id = isset($_GET['id']) ? $_GET['id'] : null;
+
+    if ($intervention_id) {
+        $client_id = $_POST['client'];
+        $intervenant_id = $_POST['intervenant'];
+        $date = $_POST['date'];
+        $commentaire = $_POST['comment'];
+        $type_id = $_POST['intervention_type'];
+        $statut_id = $_POST['intervention_statut'];
+        $urgence_id = $_POST['intervention_urgence'];
+
+        $data = [
+            'ID_Client' => $client_id,
+            'ID_Intervenant' => $intervenant_id,
+            'Date' => $date,
+            'Commentaire' => $commentaire,
+            'ID_Type' => $type_id,
+            'ID_Statut' => $statut_id,
+            'ID_Urgence' => $urgence_id,
+        ];
+
+        if ($page->updateIntervention($intervention_id, $data)) {
+            $msg = 'Intervention modifiée avec succès!';
+            header('Location: interventions.php');
+            exit;
+        } else {
+            $msg = 'Erreur lors de la modification de l\'intervention.';
+        }
+    }
 
     $msg = 'Intervention modifiée avec succès!';
 }
+
 
 echo $page->render('navbar.html.twig', [
     'msg' => $msg,
@@ -52,9 +87,10 @@ echo $page->render('navbar.html.twig', [
 
 echo $page->render('gererintervention.html.twig', [
     'msg' => $msg,
-    'intervention' => $interventionDetails,
-    'intervenants' => $intervenants,
-    'statuts' => $statuts,
-    'types' => $types,
-    'urgences' => $urgences,
+    'intervention' => $intervention,
+    'clients' => $page->getAllClients(),
+    'intervenants' => $page->getAllIntervenants(),
+    'types' => $page->getAllTypes(),
+    'statuts' => $page->getAllStatuts(),
+    'urgences' => $page->getAllUrgences(),
 ]);
