@@ -128,6 +128,27 @@ class Page
     }
 
 
+    public function getInterventionDetails($interventionId)
+    {
+        $sql = "SELECT i.*, u.Nom AS IntervenantNom, u.Prenom AS IntervenantPrenom,
+                    c.Nom AS ClientNom, c.Prenom AS ClientPrenom,
+                    t.Nom AS TypeNom, s.Nom AS StatutNom, urg.Niveau AS UrgenceNiveau
+                FROM Intervention i
+                JOIN users u ON i.ID_Intervenant = u.ID
+                JOIN users c ON i.ID_Client = c.ID
+                JOIN Type t ON i.ID_Type = t.ID_Type
+                JOIN Statut s ON i.ID_Statut = s.ID_Statut
+                JOIN Urgence urg ON i.ID_Urgence = urg.ID_Urgence
+                WHERE i.ID = :interventionId";
+        
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':interventionId', $interventionId, \PDO::PARAM_INT);
+        $sth->execute();
+
+        return $sth->fetch(\PDO::FETCH_ASSOC);
+    }
+
+
     public function render(string $name, array $data) :string
     {
         return $this->twig->render($name, $data);
