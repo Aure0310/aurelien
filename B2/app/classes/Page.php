@@ -112,7 +112,7 @@ class Page
             WHERE 
                 ID_Client = :userId OR ID_Intervenant = :userId 
             ORDER BY 
-                Date DESC
+                Date ASC
         ";
     
         $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
