@@ -1,11 +1,11 @@
-/* Reset styles */
+ 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Body styles */
+ 
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -15,7 +15,7 @@ h1{
     text-align: center;
 }
 
-/* Form container styles */
+ 
 form {
     max-width: 600px;
     margin: 20px auto;
@@ -25,13 +25,13 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Label styles */
+ 
 label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-/* Input styles */
+ 
 input[type="text"],
 input[type="date"],
 select,
@@ -52,7 +52,7 @@ textarea:focus {
     outline: none;
 }
 
-/* Button styles */
+ 
 button[type="submit"] {
     background-color: #007bff;
     color: #fff;
@@ -68,7 +68,7 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Error message styles */
+ 
 .error-message {
     color: red;
     font-size: 14px;
@@ -76,7 +76,7 @@ button[type="submit"]:hover {
 }
 
 
-/* gererintervention.css */
+ 
 .container {
     display: flex;
     justify-content: center;

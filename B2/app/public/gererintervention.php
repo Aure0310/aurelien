@@ -27,11 +27,9 @@ if ($intervention_id) {
     if (!$intervention) {
         exit("Intervention introuvable");
     }
-
-    // Récupérer l'ID du client associé à l'intervention
+ 
     $client_id = $intervention['ID_Client'];
-
-    // Récupérer les détails du client
+ 
     $client = $page->getUserById(['id' => $client_id]);
 }
 
