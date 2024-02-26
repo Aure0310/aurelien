@@ -37,7 +37,9 @@ body {
 
 input[type="email"],
 input[type="name"],
-input[type="password"] {
+input[type="password"],
+input[type="adresse"],
+input[type="telephone"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
