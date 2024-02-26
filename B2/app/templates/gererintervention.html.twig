@@ -5,55 +5,67 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Gérer l'intervention</h1>
+    <div class="container">
+        <div class="form-container">
+            <h1>Gérer l'intervention</h1>
 
-    {% if intervention %}
-        <form action="gererintervention.php?id={{ intervention.ID }}" method="post">
-            <label for="client">Client :</label>
-            <select id="client" name="client" required>
-                {% for client in clients %}
-                    <option value="{{ client.id }}" {% if client.id == intervention.ID_Client %}selected{% endif %}>{{ client.nom }} {{ client.prenom }}</option>
-                {% endfor %}
-            </select>
+            {% if intervention %}
+                <form action="gererintervention.php?id={{ intervention.ID }}" method="post">
+                    <label for="client">Client :</label>
+                    <select id="client" name="client" required>
+                        {% for client in clients %}
+                            <option value="{{ client.id }}" {% if client.id == intervention.ID_Client %}selected{% endif %}>{{ client.nom }} {{ client.prenom }}</option>
+                        {% endfor %}
+                    </select>
 
-            <label for="intervenant">Intervenant :</label>
-            <select id="intervenant" name="intervenant" required>
-                {% for intervenant in intervenants %}
-                    <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
-                {% endfor %}
-            </select>
+                    <label for="intervenant">Intervenant :</label>
+                    <select id="intervenant" name="intervenant" required>
+                        {% for intervenant in intervenants %}
+                            <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                        {% endfor %}
+                    </select>
 
-            <label for="date">Date :</label>
-                <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
+                    <label for="date">Date :</label>
+                    <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
 
 
-            <label for="intervention_type">Type d'intervention :</label>
-            <select name="intervention_type" required>
-                {% for type in types %}
-                    <option value="{{ type.ID_Type }}" {% if type.ID_Type == intervention.ID_Type %}selected{% endif %}>{{ type.Nom }}</option>
-                {% endfor %}
-            </select>
+                    <label for="intervention_type">Type d'intervention :</label>
+                    <select name="intervention_type" required>
+                        {% for type in types %}
+                            <option value="{{ type.ID_Type }}" {% if type.ID_Type == intervention.ID_Type %}selected{% endif %}>{{ type.Nom }}</option>
+                        {% endfor %}
+                    </select>
 
-            <label for="comment">Commentaire :</label>
-            <textarea name="comment" required>{{ intervention.Commentaire }}</textarea>
+                    <label for="comment">Commentaire :</label>
+                    <textarea name="comment" required>{{ intervention.Commentaire }}</textarea>
 
-            <label for="intervention_statut">Statut :</label>
-            <select name="intervention_statut" required>
-                {% for statut in statuts %}
-                    <option value="{{ statut.ID_Statut }}" {% if statut.ID_Statut == intervention.ID_Statut %}selected{% endif %}>{{ statut.Nom }}</option>
-                {% endfor %}
-            </select>
+                    <label for="intervention_statut">Statut :</label>
+                    <select name="intervention_statut" required>
+                        {% for statut in statuts %}
+                            <option value="{{ statut.ID_Statut }}" {% if statut.ID_Statut == intervention.ID_Statut %}selected{% endif %}>{{ statut.Nom }}</option>
+                        {% endfor %}
+                    </select>
 
-            <label for="intervention_urgence">Urgence :</label>
-            <select name="intervention_urgence" required>
-                {% for urgence in urgences %}
-                    <option value="{{ urgence.ID_Urgence }}" {% if urgence.ID_Urgence == intervention.ID_Urgence %}selected{% endif %}>{{ urgence.Niveau }}</option>
-                {% endfor %}
-            </select>
+                    <label for="intervention_urgence">Urgence :</label>
+                    <select name="intervention_urgence" required>
+                        {% for urgence in urgences %}
+                            <option value="{{ urgence.ID_Urgence }}" {% if urgence.ID_Urgence == intervention.ID_Urgence %}selected{% endif %}>{{ urgence.Niveau }}</option>
+                        {% endfor %}
+                    </select>
 
-            <button type="submit">Modifier</button>
-        </form>
-    {% else %}
-        <p>Intervention introuvable.</p>
-    {% endif %}
+                    <button type="submit">Modifier</button>
+                </form>
+            {% else %}
+                <p>Intervention introuvable.</p>
+            {% endif %}
+        </div>
+        
+        <div class="info-container">
+            <h2>Informations sur le client :</h2>
+            <p>Nom : {{ client.nom }}</p>
+            <p>Prénom : {{ client.prenom }}</p>
+            <p>Adresse : {{ client.adresse }}</p>
+            <p>Téléphone : {{ client.telephone }}</p>
+        </div>
+    </div>
 {% endblock %}

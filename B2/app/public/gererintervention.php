@@ -27,6 +27,12 @@ if ($intervention_id) {
     if (!$intervention) {
         exit("Intervention introuvable");
     }
+
+    // Récupérer l'ID du client associé à l'intervention
+    $client_id = $intervention['ID_Client'];
+
+    // Récupérer les détails du client
+    $client = $page->getUserById(['id' => $client_id]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -88,6 +94,7 @@ echo $page->render('navbar.html.twig', [
 echo $page->render('gererintervention.html.twig', [
     'msg' => $msg,
     'intervention' => $intervention,
+    'client' => $client, // Passer les détails du client à la vue Twig
     'clients' => $page->getAllClients(),
     'intervenants' => $page->getAllIntervenants(),
     'types' => $page->getAllTypes(),
