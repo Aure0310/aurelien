@@ -1,16 +1,25 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/edit_profil.css">
+{% endblock %}
+
 {% block body %}
-<div class="container">
-    <h1>Modifier Profil</h1>
-    <form action="update_edit_profil.php" method="post">
-        <input type="hidden" name="id" value="{{ user.id }}">
-        <div><label>Nom: <input type="text" name="nom" value="{{ user.nom }}"></label></div>
-        <div><label>Prénom: <input type="text" name="prenom" value="{{ user.prenom }}"></label></div>
-        <div><label>Adresse: <input type="text" name="adresse" value="{{ user.adresse }}"></label></div>
-        <div><label>Telephone: <input type="text" name="telephone" value="{{ user.telephone }}"></label></div>
-        <!-- Ajoutez d'autres champs ici selon vos besoins -->
-        <div><button type="submit">Sauvegarder</button></div>
+    <h1>Modifier le profil</h1>
+
+    <form action="edit_profil.php" method="post">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" value="{{ nom }}" required>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" value="{{ prenom }}" required>
+
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" name="adresse" value="{{ adresse }}" required>
+
+        <label for="telephone">Téléphone :</label>
+        <input type="text" id="telephone" name="telephone" value="{{ telephone }}" required>
+
+        <button type="submit">Modifier le profil</button>
     </form>
-</div>
 {% endblock %}
