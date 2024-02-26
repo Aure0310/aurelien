@@ -148,6 +148,37 @@ class Page
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
+public function updateIntervention($id, $data)
+{
+    try {
+        $sql = "UPDATE Intervention SET
+                ID_Client = :ID_Client,
+                ID_Intervenant = :ID_Intervenant,
+                Date = :Date,
+                Commentaire = :Commentaire,
+                ID_Type = :ID_Type,
+                ID_Statut = :ID_Statut,
+                ID_Urgence = :ID_Urgence
+                WHERE ID = :ID";
+
+        $stmt = $this->link->prepare($sql);
+
+        $stmt->bindValue(':ID_Client', $data['ID_Client'], \PDO::PARAM_INT);
+        $stmt->bindValue(':ID_Intervenant', $data['ID_Intervenant'], \PDO::PARAM_INT);
+        $stmt->bindValue(':Date', $data['Date'], \PDO::PARAM_STR);
+        $stmt->bindValue(':Commentaire', $data['Commentaire'], \PDO::PARAM_STR);
+        $stmt->bindValue(':ID_Type', $data['ID_Type'], \PDO::PARAM_INT);
+        $stmt->bindValue(':ID_Statut', $data['ID_Statut'], \PDO::PARAM_INT);
+        $stmt->bindValue(':ID_Urgence', $data['ID_Urgence'], \PDO::PARAM_INT);
+        $stmt->bindValue(':ID', $id, \PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return true;
+    } catch (\PDOException $e) {
+        return false;
+    }
+}
 
     public function render(string $name, array $data) :string
     {

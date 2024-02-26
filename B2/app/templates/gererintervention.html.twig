@@ -24,7 +24,8 @@
             </select>
 
             <label for="date">Date :</label>
-            <input type="date" name="date" value="{{ intervention.Date }}" required>
+                <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
+
 
             <label for="intervention_type">Type d'intervention :</label>
             <select name="intervention_type" required>
