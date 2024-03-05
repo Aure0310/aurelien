@@ -29,7 +29,7 @@ if ($page->session->hasRole('Admin')) {
     $statuts = $page->getAllStatuts();
     $types = $page->getAllTypes();
     $urgences = $page->getAllUrgences();
-    $roles = $page->getAllRoles();
+    $roles = $page->getAllRoles();  // Ajout de cette ligne
 
     echo $page->render('administration.html.twig', [
         'msg' => $msg,

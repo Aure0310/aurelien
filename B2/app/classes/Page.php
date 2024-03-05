@@ -96,6 +96,14 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getAllRoles()
+    {
+        $sql = "SELECT DISTINCT role FROM users";
+        $sth = $this->link->query($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
     public function getInterventionsByUser($userId)
     {
         $sql = "
