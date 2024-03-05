@@ -10,12 +10,14 @@
 
     <section>
         <h2>Utilisateurs</h2>
+        <form action="modifier_roles.php" method="post">
             <table>
                 <thead>
                     <tr>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Rôle</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,11 +25,21 @@
                         <tr>
                             <td>{{ user.nom }}</td>
                             <td>{{ user.prenom }}</td>
-                            <td>{{ user.role }}</td>
+                            <td>
+                                <select name="roles[{{ user.id }}]">
+                                    {% for userRole in roles %}
+                                        <option value="{{ userRole }}" {% if user.role == userRole %}selected{% endif %}>{{ userRole }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="user_id" value="{{ user.id }}">Modifier</button>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+        </form>
     </section>
 
     <section>
