@@ -113,26 +113,49 @@ class Page
 
     public function getInterventionsByUser($userId)
     {
-        $sql = "
-            SELECT 
-                Intervention.*,
-                Type.Nom AS Type,
-                Statut.Nom AS Statut,
-                Urgence.Niveau AS Urgence
-            FROM 
-                Intervention
-                JOIN Type ON Intervention.ID_Type = Type.ID_Type
-                JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
-                JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
-            WHERE 
-                ID_Client = :userId OR ID_Intervenant = :userId 
-            ORDER BY 
-                Date ASC
-        ";
+        if ($this->session->hasRole('Admin')) {
+            
+            $sql = "
+                SELECT 
+                    Intervention.*,
+                    Type.Nom AS Type,
+                    Statut.Nom AS Statut,
+                    Urgence.Niveau AS Urgence
+                FROM 
+                    Intervention
+                    JOIN Type ON Intervention.ID_Type = Type.ID_Type
+                    JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
+                    JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
+                ORDER BY 
+                    Date ASC
+            ";
     
-        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-        $sth->execute(['userId' => $userId]);
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+            $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+            $sth->execute();
+            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            
+            $sql = "
+                SELECT 
+                    Intervention.*,
+                    Type.Nom AS Type,
+                    Statut.Nom AS Statut,
+                    Urgence.Niveau AS Urgence
+                FROM 
+                    Intervention
+                    JOIN Type ON Intervention.ID_Type = Type.ID_Type
+                    JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
+                    JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
+                WHERE 
+                    ID_Client = :userId OR ID_Intervenant = :userId 
+                ORDER BY 
+                    Date ASC
+            ";
+    
+            $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+            $sth->execute(['userId' => $userId]);
+            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        }
     }
 
     public function insertIntervention(array $data)
