@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un nouveau statut</title>
+</head>
+<body>
+    <h1>Créer un nouveau statut</h1>
+    <form method="post" action="nouveau_statut.php">
+        <label for="nom">Nom du statut :</label>
+        <input type="text" name="nom" id="nom" required>
+        <button type="submit">Créer</button>
+    </form>
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+</body>
+</html>
