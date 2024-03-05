@@ -107,10 +107,8 @@ class Page
 
     public function getAllRoles()
     {
-        $sql = "SELECT DISTINCT role FROM users";
-        $sth = $this->link->query($sql);
-        $sth->execute();
-        return $sth->fetchAll(\PDO::FETCH_COLUMN);
+        $roles = ["Admin", "Standardiste", "Intervenant", "Client"];
+        return $roles;
     }
 
     public function getInterventionsByUser($userId)

@@ -28,12 +28,10 @@ if ($page->session->hasRole('Admin')) {
     $users = [];
     $roles = $page->getAllRoles();  
 
-    // Vérifier si un rôle est sélectionné dans le filtre
     if(isset($_GET['filter_role']) && in_array($_GET['filter_role'], $roles)) {
         $filteredRole = $_GET['filter_role'];
-        $users = $page->getUsersByRole($filteredRole); // Modifier cette ligne pour récupérer les utilisateurs par rôle depuis la base de données
+        $users = $page->getUsersByRole($filteredRole);
     } else {
-        // Si aucun rôle n'est sélectionné, afficher tous les utilisateurs
         $users = $page->getAllUsers();
     }
 
@@ -51,7 +49,7 @@ if ($page->session->hasRole('Admin')) {
         'types' => $types,
         'urgences' => $urgences,
         'roles' => $roles,
-        'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '', // Passer le rôle filtré à Twig
+        'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '',
     ]);
 
 } else {
