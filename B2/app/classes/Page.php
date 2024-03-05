@@ -198,4 +198,12 @@ public function updateUserProfile($userId, $data)
     }
  
 
+    public function insertStatut($name)
+    {
+        $sql = "INSERT INTO Statut (Nom) VALUES (:nom)";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindValue(':nom', $name);
+        $stmt->execute();
+    }
+
 }

@@ -54,25 +54,28 @@
         </form>
     </section>
 
-    <section>
-        <h2>Statuts</h2>
-        <table>
-            <thead>
+ 
+<section>
+    <h2>Statuts</h2>
+    <a href="nouveau_statut.php"><button>Créer</button></a> 
+    <table>
+        <thead>
+            <tr>
+                <th>ID_Statut</th>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for statut in statuts %}
                 <tr>
-                    <th>ID_Statut</th>
-                    <th>Nom</th>
+                    <td>{{ statut.ID_Statut }}</td>
+                    <td>{{ statut.Nom }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for statut in statuts %}
-                    <tr>
-                        <td>{{ statut.ID_Statut }}</td>
-                        <td>{{ statut.Nom }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
 
     <section>
         <h2>Types</h2>
