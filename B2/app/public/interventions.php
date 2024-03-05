@@ -16,9 +16,12 @@ if ($page->session->isConnected()) {
         $prenom = $user['prenom'];
         $nom = $user['nom'];
         $role = $user['role'];
-        $interventions = $page->getInterventionsByUser($user_id);
+        $filter_intervenant = isset($_GET['filter_intervenant']) ? $_GET['filter_intervenant'] : '';
+        $interventions = $page->getInterventionsByUser($user_id, $filter_intervenant);
     }
 }
+
+$intervenants = $page->getAllIntervenants();
 
 echo $page->render('navbar.html.twig', [
     'msg' => $msg,
@@ -30,4 +33,7 @@ echo $page->render('navbar.html.twig', [
 echo $page->render('interventions.html.twig', [
     'msg' => $msg,
     'interventions' => $interventions,
+    'intervenants' => $intervenants,
+    'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '',
+    'filter_intervenant' => isset($_GET['filter_intervenant']) ? $_GET['filter_intervenant'] : '',
 ]);

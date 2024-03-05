@@ -92,7 +92,7 @@ echo $page->render('navbar.html.twig', [
 echo $page->render('gererintervention.html.twig', [
     'msg' => $msg,
     'intervention' => $intervention,
-    'client' => $client, // Passer les détails du client à la vue Twig
+    'client' => $client,  
     'clients' => $page->getAllClients(),
     'intervenants' => $page->getAllIntervenants(),
     'types' => $page->getAllTypes(),

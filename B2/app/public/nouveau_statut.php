@@ -9,7 +9,7 @@ $msg = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['nom'];
 
-    if (!empty($name)) { // Correction ici
+    if (!empty($name)) {  
         $page->insertStatut($name);
         $msg = 'Le nouveau statut a été créé avec succès.';
     } else {
