@@ -158,46 +158,29 @@ class Page
 
 public function updateIntervention($id, $data)
 {
-    try {
-        $sql = "UPDATE Intervention SET
-                ID_Client = :ID_Client,
-                ID_Intervenant = :ID_Intervenant,
-                Date = :Date,
-                Commentaire = :Commentaire,
-                ID_Type = :ID_Type,
-                ID_Statut = :ID_Statut,
-                ID_Urgence = :ID_Urgence
-                WHERE ID = :ID";
+    $sql = "UPDATE Intervention SET
+                    ID_Client = :ID_Client,
+                    ID_Intervenant = :ID_Intervenant,
+                    Date = :Date,
+                    Commentaire = :Commentaire,
+                    ID_Type = :ID_Type,
+                    ID_Statut = :ID_Statut,
+                    ID_Urgence = :ID_Urgence
+                    WHERE ID = :ID";
 
-        $stmt = $this->link->prepare($sql);
+    return $this->link->prepare($sql)->execute(array_merge($data, [':ID' => $id]));
+}
 
-        $stmt->bindValue(':ID_Client', $data['ID_Client'], \PDO::PARAM_INT);
-        $stmt->bindValue(':ID_Intervenant', $data['ID_Intervenant'], \PDO::PARAM_INT);
-        $stmt->bindValue(':Date', $data['Date'], \PDO::PARAM_STR);
-        $stmt->bindValue(':Commentaire', $data['Commentaire'], \PDO::PARAM_STR);
-        $stmt->bindValue(':ID_Type', $data['ID_Type'], \PDO::PARAM_INT);
-        $stmt->bindValue(':ID_Statut', $data['ID_Statut'], \PDO::PARAM_INT);
-        $stmt->bindValue(':ID_Urgence', $data['ID_Urgence'], \PDO::PARAM_INT);
-        $stmt->bindValue(':ID', $id, \PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        return true;
-    } catch (\PDOException $e) {
-        return false;
-    }
+public function updateUserRole($data)
+{
+    $sql = "UPDATE users SET role = :role WHERE id = :id";
+    $this->link->prepare($sql)->execute($data);
 }
 
 public function updateUserProfile($userId, $data)
 {
     $sql = "UPDATE users SET nom = :nom, prenom = :prenom, adresse = :adresse, telephone = :telephone WHERE id = :id";
-    $stmt = $this->link->prepare($sql);
-    $stmt->bindValue(':nom', $data['nom'], \PDO::PARAM_STR);
-    $stmt->bindValue(':prenom', $data['prenom'], \PDO::PARAM_STR);
-    $stmt->bindValue(':adresse', $data['adresse'], \PDO::PARAM_STR);
-    $stmt->bindValue(':telephone', $data['telephone'], \PDO::PARAM_STR);
-    $stmt->bindValue(':id', $userId, \PDO::PARAM_INT);
-    $stmt->execute();
+    $this->link->prepare($sql)->execute(array_merge($data, [':id' => $userId]));
 }
 
     public function render(string $name, array $data) :string
