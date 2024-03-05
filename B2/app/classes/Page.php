@@ -55,6 +55,15 @@ class Page
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getUsersByRole($role)
+{
+    $sql = "SELECT * FROM users WHERE role = :role ORDER BY nom, prenom";
+    $stmt = $this->link->prepare($sql);
+    $stmt->bindParam(':role', $role);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
     
     public function getAllClients()
     {
@@ -204,4 +213,6 @@ public function updateUserProfile($userId, $data)
     {
         return $this->twig->render($name, $data);
     }
+ 
+
 }

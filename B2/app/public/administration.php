@@ -25,11 +25,21 @@ if ($page->session->isConnected()) {
 }
 
 if ($page->session->hasRole('Admin')) {
-    $users = $page->getAllUsers();
+    $users = [];
+    $roles = $page->getAllRoles();  
+
+    // Vérifier si un rôle est sélectionné dans le filtre
+    if(isset($_GET['filter_role']) && in_array($_GET['filter_role'], $roles)) {
+        $filteredRole = $_GET['filter_role'];
+        $users = $page->getUsersByRole($filteredRole); // Modifier cette ligne pour récupérer les utilisateurs par rôle depuis la base de données
+    } else {
+        // Si aucun rôle n'est sélectionné, afficher tous les utilisateurs
+        $users = $page->getAllUsers();
+    }
+
     $statuts = $page->getAllStatuts();
     $types = $page->getAllTypes();
     $urgences = $page->getAllUrgences();
-    $roles = $page->getAllRoles();  // Ajout de cette ligne
 
     echo $page->render('administration.html.twig', [
         'msg' => $msg,
@@ -40,7 +50,8 @@ if ($page->session->hasRole('Admin')) {
         'statuts' => $statuts,
         'types' => $types,
         'urgences' => $urgences,
-        'roles' => $roles,  // Ajout de cette ligne
+        'roles' => $roles,
+        'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '', // Passer le rôle filtré à Twig
     ]);
 
 } else {

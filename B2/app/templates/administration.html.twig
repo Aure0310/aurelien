@@ -8,6 +8,18 @@
     {% include 'navbar.html.twig' %}
     <h1>Administration</h1>
 
+    <!-- Ajouter le formulaire de filtrage des rôles -->
+    <form action="" method="get">
+        <label for="filter_role">Filtrer par rôle :</label>
+        <select name="filter_role" id="filter_role">
+            <option value="">Tous les rôles</option>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if filter_role == role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+
     <section>
         <h2>Utilisateurs</h2>
         <form action="modifier_roles.php" method="post">
@@ -80,7 +92,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
     </section>
 
     <section>
@@ -101,6 +112,5 @@
                 {% endfor %}
             </tbody>
         </table>
-
     </section>
 {% endblock %}
