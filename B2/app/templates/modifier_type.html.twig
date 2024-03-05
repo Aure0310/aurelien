@@ -1,0 +1,23 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/modifier_type.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <h1>Modifier le type</h1>
+
+    {% if type %}
+        <form action="modifier_type.php" method="post">
+
+            <input type="hidden" name="type_id" value="{{ type.ID_Type }}">
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" value="{{ type.Nom }}" required>
+
+            <button type="submit">Modifier</button>
+        </form>
+    {% else %}
+        <p>Type introuvable.</p>
+    {% endif %}
+{% endblock %}

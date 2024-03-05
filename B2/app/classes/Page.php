@@ -213,18 +213,107 @@ public function updateUserProfile($userId, $data)
     $this->link->prepare($sql)->execute(array_merge($data, [':id' => $userId]));
 }
 
+public function addStatut($nom)
+{
+    $sql = "INSERT INTO Statut (Nom) VALUES (:nom)";
+    $sth = $this->link->prepare($sql);
+    return $sth->execute(['nom' => $nom]);
+}
+
+public function addType($nom)
+{
+    $sql = "INSERT INTO Type (Nom) VALUES (:nom)";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['nom' => $nom]);
+}
+
+public function addUrgence($niveau)
+{
+    $sql = "INSERT INTO Urgence (Niveau) VALUES (:niveau)";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['niveau' => $niveau]);
+}
+
+public function getStatutById($statutId)
+{
+    $sql = "SELECT * FROM Statut WHERE ID_Statut = :statutId";
+    $stmt = $this->link->prepare($sql);
+    $stmt->execute(['statutId' => $statutId]);
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
+public function getTypeById($typeId)
+{
+    $sql = "SELECT * FROM Type WHERE ID_Type = :typeId";
+    $stmt = $this->link->prepare($sql);
+    $stmt->execute(['typeId' => $typeId]);
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
+public function getUrgenceById($urgenceId)
+{
+    $sql = "SELECT * FROM Urgence WHERE ID_Urgence = :urgenceId";
+    $stmt = $this->link->prepare($sql);
+    $stmt->execute(['urgenceId' => $urgenceId]);
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
+public function editStatut($id, $data)
+{
+    try {
+        $sql = "UPDATE Statut SET Nom = :nom WHERE ID_Statut = :id";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindValue(':nom', $data['nom'], \PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return true;
+    } catch (\PDOException $e) {
+        return false;
+    }
+}
+
+
+public function editType($id, $nom)
+{
+    $sql = "UPDATE Type SET Nom = :nom WHERE ID_Type = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['nom' => $nom, 'id' => $id]);
+}
+
+public function editUrgence($id, $niveau)
+{
+    $sql = "UPDATE Urgence SET Niveau = :niveau WHERE ID_Urgence = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['niveau' => $niveau, 'id' => $id]);
+}
+
+public function deleteStatut($id)
+{
+    $sql = "DELETE FROM Statut WHERE ID_Statut = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['id' => $id]);
+}
+
+public function deleteType($id)
+{
+    $sql = "DELETE FROM Type WHERE ID_Type = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['id' => $id]);
+}
+
+public function deleteUrgence($id)
+{
+    $sql = "DELETE FROM Urgence WHERE ID_Urgence = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['id' => $id]);
+}
+
     public function render(string $name, array $data) :string
     {
         return $this->twig->render($name, $data);
     }
- 
-
-    public function insertStatut($name)
-    {
-        $sql = "INSERT INTO Statut (Nom) VALUES (:nom)";
-        $stmt = $this->link->prepare($sql);
-        $stmt->bindValue(':nom', $name);
-        $stmt->execute();
-    }
-
 }
