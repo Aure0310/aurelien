@@ -111,52 +111,63 @@ class Page
         return $roles;
     }
 
-    public function getInterventionsByUser($userId)
-    {
-        if ($this->session->hasRole('Admin')) {
-            
-            $sql = "
-                SELECT 
-                    Intervention.*,
-                    Type.Nom AS Type,
-                    Statut.Nom AS Statut,
-                    Urgence.Niveau AS Urgence
-                FROM 
-                    Intervention
-                    JOIN Type ON Intervention.ID_Type = Type.ID_Type
-                    JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
-                    JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
-                ORDER BY 
-                    Date ASC
-            ";
-    
-            $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-            $sth->execute();
-            return $sth->fetchAll(\PDO::FETCH_ASSOC);
-        } else {
-            
-            $sql = "
-                SELECT 
-                    Intervention.*,
-                    Type.Nom AS Type,
-                    Statut.Nom AS Statut,
-                    Urgence.Niveau AS Urgence
-                FROM 
-                    Intervention
-                    JOIN Type ON Intervention.ID_Type = Type.ID_Type
-                    JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
-                    JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
-                WHERE 
-                    ID_Client = :userId OR ID_Intervenant = :userId 
-                ORDER BY 
-                    Date ASC
-            ";
-    
-            $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-            $sth->execute(['userId' => $userId]);
-            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    public function getInterventionsByUser($userId, $filter_intervenant = '')
+{
+    if ($this->session->hasRole('Admin')) {
+        $sql = "
+            SELECT 
+                Intervention.*,
+                Type.Nom AS Type,
+                Statut.Nom AS Statut,
+                Urgence.Niveau AS Urgence
+            FROM 
+                Intervention
+                JOIN Type ON Intervention.ID_Type = Type.ID_Type
+                JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
+                JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
+            WHERE 
+                1
+        ";
+
+         if (!empty($filter_intervenant)) {
+            $sql .= " AND ID_Intervenant = :filter_intervenant";
         }
+
+        $sql .= " ORDER BY Date ASC";
+
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+
+         $params = [];
+        if (!empty($filter_intervenant)) {
+            $params[':filter_intervenant'] = $filter_intervenant;
+        }
+
+        $sth->execute($params);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    } else {
+        $sql = "
+            SELECT 
+                Intervention.*,
+                Type.Nom AS Type,
+                Statut.Nom AS Statut,
+                Urgence.Niveau AS Urgence
+            FROM 
+                Intervention
+                JOIN Type ON Intervention.ID_Type = Type.ID_Type
+                JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
+                JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
+            WHERE 
+                ID_Client = :userId OR ID_Intervenant = :userId 
+            ORDER BY 
+                Date ASC
+        ";
+
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sth->execute(['userId' => $userId]);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
+}
+
 
     public function insertIntervention(array $data)
     {
@@ -316,4 +327,14 @@ public function deleteUrgence($id)
     {
         return $this->twig->render($name, $data);
     }
+ 
+
+    public function insertStatut($name)
+    {
+        $sql = "INSERT INTO Statut (Nom) VALUES (:nom)";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindValue(':nom', $name);
+        $stmt->execute();
+    }
+
 }
