@@ -7,15 +7,17 @@
 {% block body %}
     <nav class="navbar">
         <div class="navbar-logo">
-            <img src="img/logo.jpg" alt="Logo" class="logo">
+            <a href="accueil.php">
+                <img src="img/logo.jpg" alt="Logo" class="logo">
+            </a>
         </div>
         <div class="navbar-left">
             <input type="text" placeholder="Rechercher" class="navbar-search">
+        </div>
+        <div class="navbar-right">
             {% if role == 'Admin' %}
                 <a href="administration.php" class="navbar-button">Administration</a>
             {% endif %}
-        </div>
-        <div class="navbar-right">
             <a href="interventions.php" class="navbar-button">Interventions</a>
             <a href="accueil.php" class="navbar-button">Accueil</a>
             <div class="navbar-user">

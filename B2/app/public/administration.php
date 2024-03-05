@@ -32,7 +32,7 @@ if ($page->session->hasRole('Admin')) {
         $filteredRole = $_GET['filter_role'];
         $users = $page->getUsersByRole($filteredRole); 
     } else {
-         $users = $page->getAllUsers();
+        $users = $page->getAllUsers();
     }
 
     $statuts = $page->getAllStatuts();
@@ -49,7 +49,7 @@ if ($page->session->hasRole('Admin')) {
         'types' => $types,
         'urgences' => $urgences,
         'roles' => $roles,
-        'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '',  
+        'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '', 
     ]);
 
 } else {
