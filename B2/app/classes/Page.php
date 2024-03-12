@@ -235,14 +235,14 @@ public function addType($nom)
 {
     $sql = "INSERT INTO Type (Nom) VALUES (:nom)";
     $sth = $this->link->prepare($sql);
-    $sth->execute(['nom' => $nom]);
+    return $sth->execute(['nom' => $nom]);
 }
 
 public function addUrgence($niveau)
 {
     $sql = "INSERT INTO Urgence (Niveau) VALUES (:niveau)";
     $sth = $this->link->prepare($sql);
-    $sth->execute(['niveau' => $niveau]);
+    return $sth->execute(['niveau' => $niveau]);
 }
 
 public function getStatutById($statutId)
@@ -288,11 +288,19 @@ public function editStatut($id, $data)
 }
 
 
-public function editType($id, $nom)
+public function editType($id, $data)
 {
-    $sql = "UPDATE Type SET Nom = :nom WHERE ID_Type = :id";
-    $sth = $this->link->prepare($sql);
-    $sth->execute(['nom' => $nom, 'id' => $id]);
+    try {
+        $sql = "UPDATE 'Type' SET Nom = :nom WHERE ID_Type = :id";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindValue(':nom', $data['nom'], \PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return true;
+    } catch (\PDOException $e) {
+        return false;
+    }
 }
 
 public function editUrgence($id, $niveau)
@@ -304,9 +312,14 @@ public function editUrgence($id, $niveau)
 
 public function deleteStatut($id)
 {
-    $sql = "DELETE FROM Statut WHERE ID_Statut = :id";
-    $sth = $this->link->prepare($sql);
-    $sth->execute(['id' => $id]);
+    try {
+        $sql = "DELETE FROM Statut WHERE ID_Statut = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute(['id' => $id]);
+        return true;
+    } catch (\PDOException $e) {
+        return false;
+    }
 }
 
 public function deleteType($id)

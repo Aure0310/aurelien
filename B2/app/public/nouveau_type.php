@@ -35,10 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($nom)) {
         $msg = 'Veuillez saisir un nom de type.';
     } else {
-        $success = $page->addType(['Nom' => $nom]);
+        $success = $page->addType($nom);
 
         if ($success) {
             $msg = 'Type ajouté avec succès !';
+            header('Location: administration.php');
+            exit(); 
         } else {
             $msg = 'Erreur lors de l\'ajout du type.';
         }

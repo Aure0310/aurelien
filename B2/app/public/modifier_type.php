@@ -12,12 +12,7 @@ if ($page->session->isConnected()) {
 
     $user = $page->getUserById(['id' => $user_id]);
 
-    if ($user) {
-        $prenom = $user['prenom'];
-        $nom = $user['nom'];
-        $role = $user['role'];
-
-    } else {
+    if (!$user) {
         $msg = "Utilisateur introuvable dans la base de données.";
     }
 } else {
@@ -30,6 +25,8 @@ if ($page->session->isConnected() && $page->session->hasRole('Admin')) {
 
         if ($page->editType($typeId, $_POST)) {
             $msg = 'Type modifié avec succès !';
+            header('Location: administration.php');
+            exit(); 
         } else {
             $msg = 'Erreur lors de la modification du type.';
         }
@@ -40,9 +37,9 @@ if ($page->session->isConnected() && $page->session->hasRole('Admin')) {
 
     echo $page->render('modifier_type.html.twig', [
         'msg' => $msg,
-        'prenom' => $prenom,
-        'nom' => $nom,
-        'role' => $role,
+        'prenom' => $user['prenom'],
+        'nom' => $user['nom'],
+        'role' => $user['role'],
         'type' => $type,
     ]);
 } else {

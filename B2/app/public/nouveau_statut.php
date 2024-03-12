@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($success) {
             $msg = 'Statut ajouté avec succès !';
+            header('Location: administration.php');
+            exit(); 
         } else {
             $msg = 'Erreur lors de l\'ajout du statut.';
         }

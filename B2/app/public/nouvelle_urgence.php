@@ -35,10 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($niveau)) {
         $msg = 'Veuillez saisir un niveau d\'urgence.';
     } else {
-        $success = $page->addUrgence(['Niveau' => $niveau]);
+        $success = $page->addUrgence($niveau);
 
         if ($success) {
             $msg = 'Urgence ajoutée avec succès !';
+            header('Location: administration.php');
+            exit();
         } else {
             $msg = 'Erreur lors de l\'ajout de l\'urgence.';
         }

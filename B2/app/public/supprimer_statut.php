@@ -5,21 +5,20 @@ require_once '../vendor/autoload.php';
 use App\Page;
 
 $page = new Page();
-$msg = '';
 
 if ($page->session->isConnected() && $page->session->hasRole('Admin')) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['statut_id'])) {
-        $statutId = $_POST['statut_id'];
+    if (isset($_GET['id'])) {
+        $statutId = $_GET['id'];
 
         if ($page->deleteStatut($statutId)) {
-            $msg = 'Statut supprimé avec succès !';
+            header('Location: administration.php');
+            exit();
         } else {
-            $msg = 'Erreur lors de la suppression du statut.';
+            echo "Erreur lors de la suppression du statut.";
         }
+    } else {
+        echo "L'ID du statut à supprimer n'est pas spécifié.";
     }
-
-    header('Location: administration.php?msg=' . $msg);
-    exit();
 } else {
     header('Location: accueil.php');
     exit();

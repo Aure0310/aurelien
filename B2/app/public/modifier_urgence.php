@@ -12,12 +12,7 @@ if ($page->session->isConnected()) {
 
     $user = $page->getUserById(['id' => $user_id]);
 
-    if ($user) {
-        $prenom = $user['prenom'];
-        $nom = $user['nom'];
-        $role = $user['role'];
-
-    } else {
+    if (!$user) {
         $msg = "Utilisateur introuvable dans la base de données.";
     }
 } else {
@@ -30,20 +25,21 @@ if ($page->session->isConnected() && $page->session->hasRole('Admin')) {
 
         if ($page->editUrgence($urgenceId, $_POST)) {
             $msg = 'Urgence modifiée avec succès !';
+            header('Location: administration.php');
+            exit(); 
         } else {
-            $msg = 'Erreur lors de la modification de l'urgence.';
+            $msg = 'Erreur lors de la modification de l\'urgence.';
         }
     }
 
-    // Code pour récupérer les détails de l'urgence par son ID
     $urgenceId = $_GET['id'] ?? null;
     $urgence = $page->getUrgenceById($urgenceId);
 
     echo $page->render('modifier_urgence.html.twig', [
         'msg' => $msg,
-        'prenom' => $prenom,
-        'nom' => $nom,
-        'role' => $role,
+        'prenom' => $user['prenom'],
+        'nom' => $user['nom'],
+        'role' => $user['role'],
         'urgence' => $urgence,
     ]);
 } else {
