@@ -32,3 +32,42 @@ h1 {
 .profile-info p {
     font-size: 1.2em; 
 }
+ 
+.edit-profile .btn-primary {
+    background-color: #3c5877;  
+    color: #fff;  
+    padding: 10px 20px;  
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;  
+    text-decoration: none;  
+}
+
+.edit-profile .btn-primary:hover {
+    background-color: #0056b3;  
+}
+
+.profile-container {
+    display: flex;
+}
+
+.profile-picture-container {
+    flex: 0 0 auto;
+}
+
+.profile-info-container {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.profile-info {
+    text-align: left;
+}
+
+.edit-profile {
+    text-align: right;
+    align-self: flex-start; /* Pour aligner le bouton en haut */
+    margin-top: -170px;
+}
+
+ 

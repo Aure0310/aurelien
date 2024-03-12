@@ -1,16 +1,24 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/accueil.css">
+{% endblock %}
+
 {% block body %}
-    
-    <h1>Accueil</h1>
+    <div class="background-image">
+        <img class="background-image" src="img/accueil.jpg" alt="Eolienne">
+        <div class="content">
+            <div class="overlay">
+                <h1>Bienvenue sur Accord Energie</h1>
+                <p>Vous pouvez ...</p>
 
-    {% if isStandardiste %}
-        <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
-    {% endif %}
-    {% if isAdmin %}
-        <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
-    {% endif %}
-
-    <p><a href="logout.php">Déconnexion</a></p>
-
+                {% if isStandardiste or isAdmin %}
+                    <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
+                {% endif %}
+                
+                 
+            </div>
+        </div>
+        <p><a href="logout.php" class="bouton-deconnexion">Déconnexion</a></p>
+    </div>
 {% endblock %}
