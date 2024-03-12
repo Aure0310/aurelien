@@ -1,0 +1,23 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/modifier_statut.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <h1>Modifier le statut</h1>
+
+    {% if statut %}
+        <form action="modifier_statut.php" method="post">
+    
+            <input type="hidden" name="statut_id" value="{{ statut.ID_Statut }}">
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" value="{{ statut.Nom }}" required>
+
+            <button type="submit">Modifier</button>
+        </form>
+    {% else %}
+        <p>Statut introuvable.</p>
+    {% endif %}
+{% endblock %}

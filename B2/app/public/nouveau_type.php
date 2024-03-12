@@ -33,21 +33,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
 
     if (empty($nom)) {
-        $msg = 'Veuillez saisir un nom de statut.';
+        $msg = 'Veuillez saisir un nom de type.';
     } else {
-        $success = $page->addStatut($nom);
+        $success = $page->addType($nom);
 
         if ($success) {
-            $msg = 'Statut ajouté avec succès !';
+            $msg = 'Type ajouté avec succès !';
             header('Location: administration.php');
             exit(); 
         } else {
-            $msg = 'Erreur lors de l\'ajout du statut.';
+            $msg = 'Erreur lors de l\'ajout du type.';
         }
     }
 }
 
-echo $page->render('nouveau_statut.html.twig', [
+echo $page->render('nouveau_type.html.twig', [
     'msg' => $msg,
     'prenom' => $prenom,
     'nom' => $nom,

@@ -1,0 +1,21 @@
+{% extends "base_auth.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/modifier_urgence.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <h1>Modifier l'urgence</h1>
+
+    {% if urgence %}
+        <form action="modifier_urgence.php" method="post">
+            <input type="hidden" name="urgence_id" value="{{ urgence.ID_Urgence }}">
+            <label for="niveau">Niveau :</label>
+            <input type="text" name="niveau" value="{{ urgence.Niveau }}" required>
+            <button type="submit">Modifier</button>
+        </form>
+    {% else %}
+        <p>Urgence introuvable.</p>
+    {% endif %}
+{% endblock %}

@@ -1,16 +1,16 @@
 {% extends "base_auth.html.twig" %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="css/nouveau_statut.css">
+    <link rel="stylesheet" href="css/nouvelle_urgence.css">
 {% endblock %}
 
 {% block body %}
     {% include 'navbar.html.twig' %}
-    <h1>Nouveau Statut</h1>
+    <h1>Nouvelle Urgence</h1>
 
     <form action="" method="post">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required>
+        <label for="niveau">Nom du Niveau :</label>
+        <input type="text" id="niveau" name="niveau" required>
         
         <button type="submit">Créer</button>
     </form>

@@ -30,24 +30,24 @@ if (!$page->session->hasRole('Admin')) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = $_POST['nom'];
+    $niveau = $_POST['niveau'];
 
-    if (empty($nom)) {
-        $msg = 'Veuillez saisir un nom de statut.';
+    if (empty($niveau)) {
+        $msg = 'Veuillez saisir un niveau d\'urgence.';
     } else {
-        $success = $page->addStatut($nom);
+        $success = $page->addUrgence($niveau);
 
         if ($success) {
-            $msg = 'Statut ajouté avec succès !';
+            $msg = 'Urgence ajoutée avec succès !';
             header('Location: administration.php');
-            exit(); 
+            exit();
         } else {
-            $msg = 'Erreur lors de l\'ajout du statut.';
+            $msg = 'Erreur lors de l\'ajout de l\'urgence.';
         }
     }
 }
 
-echo $page->render('nouveau_statut.html.twig', [
+echo $page->render('nouvelle_urgence.html.twig', [
     'msg' => $msg,
     'prenom' => $prenom,
     'nom' => $nom,
