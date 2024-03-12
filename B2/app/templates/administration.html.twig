@@ -96,8 +96,8 @@
                         <td>{{ type.ID_Type }}</td>
                         <td>{{ type.Nom }}</td>
                         <td>
-                            <a href="modifier_type.php"><button>Modifier</button></a>
-                            <a href="supprimer_type.php"><button>Supprimer</button></a>
+                            <a href="modifier_type.php?id={{ type.ID_Type }}"><button>Modifier</button></a>
+                            <a href="supprimer_type.php?id={{ type.ID_Type }}"><button>Supprimer</button></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -122,8 +122,8 @@
                         <td>{{ urgence.ID_Urgence }}</td>
                         <td>{{ urgence.Niveau }}</td>
                         <td>
-                            <a href="modifier_urgence.php"><button>Modifier</button></a>
-                            <a href="supprimer_urgence.php"><button>Supprimer</button></a>
+                            <a href="modifier_urgence.php?id={{ urgence.ID_Urgence }}"><button>Modifier</button></a>
+                            <a href="supprimer_urgence.php?id={{ urgence.ID_Urgence }}"><button>Supprimer</button></a>
                         </td>
                     </tr>
                 {% endfor %}
