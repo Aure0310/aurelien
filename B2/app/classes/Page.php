@@ -303,11 +303,13 @@ public function editType($id, $data)
     }
 }
 
-public function editUrgence($id, $niveau)
+public function editUrgence($id, $data)
 {
     $sql = "UPDATE Urgence SET Niveau = :niveau WHERE ID_Urgence = :id";
-    $sth = $this->link->prepare($sql);
-    $sth->execute(['niveau' => $niveau, 'id' => $id]);
+    $stmt = $this->link->prepare($sql);
+    $stmt->bindValue(':niveau', $data['niveau'], \PDO::PARAM_STR);
+    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+    $stmt->execute();
 }
 
 public function deleteStatut($id)
