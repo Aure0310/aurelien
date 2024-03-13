@@ -4,96 +4,110 @@
     <link rel="stylesheet" href="css/interventions.css">
 {% endblock %}
 
-
-
 {% block body %}
     <h1>Interventions en cours</h1>
 
-     <section>
+    <section>
         <h2>Interventions</h2>
-    <form action="" method="get">
-        <label for="filter_intervenant">Filtrer par intervenant :</label>
-        <select name="filter_intervenant" id="filter_intervenant">
-            <option value="">Tous les intervenants</option>
-            {% for intervenant in intervenants %}
-                {% if intervenant['id'] == filter_intervenant %}
-                    <option value="{{ intervenant['id'] }}" selected>{{ intervenant['prenom'] }} {{ intervenant['nom'] }}</option>
-                {% else %}
-                    <option value="{{ intervenant['id'] }}">{{ intervenant['prenom'] }} {{ intervenant['nom'] }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <button type="submit">Filtrer</button>
-    </form>
+        <form action="" method="get">
+            <label for="filter_intervenant">Filtrer par intervenant :</label>
+            <select name="filter_intervenant" id="filter_intervenant">
+                <option value="">Tous les intervenants</option>
+                {% for intervenant in intervenants %}
+                    {% if intervenant['id'] == filter_intervenant %}
+                        <option value="{{ intervenant['id'] }}" selected>{{ intervenant['prenom'] }} {{ intervenant['nom'] }}</option>
+                    {% else %}
+                        <option value="{{ intervenant['id'] }}">{{ intervenant['prenom'] }} {{ intervenant['nom'] }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrer</button>
+        </form>
 
-
-
-{% if interventions %}
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Statut</th>
-                <th>Urgence</th>
-                <th>Commentaire</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for intervention in interventions %}
-                {% if intervention.Statut != 'Résolu' %}
+        {% if interventions %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ intervention.Date|date("d/m/Y") }}</td>
-                        <td>{{ intervention.Type }}</td>
-                        <td>{{ intervention.Statut }}</td>
-                        <td>{{ intervention.Urgence }}</td>
-                        <td>{{ intervention.Commentaire }}</td>
-                        <td>
-                            <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Statut</th>
+                        <th>Urgence</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Intervenant</th>
+                        <th>Action</th>
                     </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>Aucune intervention en cours.</p>
-{% endif %}
+                </thead>
+                <tbody>
+                    {% for intervention in interventions %}
+                        {% if intervention.Statut != 'Résolu' %}
+                            <tr>
+                                <td>{{ intervention.ID }}</td>
+                                <td>{{ intervention.Statut }}</td>
+                                <td>{{ intervention.Urgence }}</td>
+                                <td>{{ intervention.Date|date("d/m/Y") }}</td>
+                                <td>{{ intervention.Type }}</td>
+                                <td>
+                                    {% for intervenant in intervenants %}
+                                    {% if intervenant.id == intervention.ID_Intervenant %}
+                                     <p>{{ intervenant.nom }} {{ intervenant.prenom }}</p>
+                                    {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune intervention en cours.</p>
+        {% endif %}
+    </section>
 
-<h1>Interventions résolues</h1>
+    <h1>Interventions résolues</h1>
 
-{% if interventions %}
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Statut</th>
-                <th>Urgence</th>
-                <th>Commentaire</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for intervention in interventions %}
-                {% if intervention.Statut == 'Résolu' %}
+    {% if interventions %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ intervention.Date|date("d/m/Y") }}</td>
-                        <td>{{ intervention.Type }}</td>
-                        <td>{{ intervention.Statut }}</td>
-                        <td>{{ intervention.Urgence }}</td>
-                        <td>{{ intervention.Commentaire }}</td>
-                        <td>
-                            <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Statut</th>
+                        <th>Urgence</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Intervenant</th>
+                        <th>Action</th>
                     </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>Aucune intervention résolue.</p>
-{% endif %}
-
+                </thead>
+                <tbody>
+                    {% for intervention in interventions %}
+                        {% if intervention.Statut == 'Résolu' %}
+                            <tr>
+                                <td>{{ intervention.ID }}</td>
+                                <td>{{ intervention.Statut }}</td>
+                                <td>{{ intervention.Urgence }}</td>
+                                <td>{{ intervention.Date|date("d/m/Y") }}</td>
+                                <td>{{ intervention.Type }}</td>
+                                <td>
+                                    {% for intervenant in intervenants %}
+                                    {% if intervenant.id == intervention.ID_Intervenant %}
+                                     <p>{{ intervenant.nom }} {{ intervenant.prenom }}</p>
+                                    {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune intervention en cours.</p>
+        {% endif %}
 {% endblock %}
+
+

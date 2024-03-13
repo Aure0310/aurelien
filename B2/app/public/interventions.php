@@ -23,6 +23,7 @@ if ($page->session->isConnected()) {
 
 $intervenants = $page->getAllIntervenants();
 
+
 echo $page->render('navbar.html.twig', [
     'msg' => $msg,
     'prenom' => $prenom,
@@ -33,7 +34,7 @@ echo $page->render('navbar.html.twig', [
 echo $page->render('interventions.html.twig', [
     'msg' => $msg,
     'interventions' => $interventions,
-    'intervenants' => $intervenants,
+    'intervenants' => $intervenants,  
     'filter_role' => isset($_GET['filter_role']) ? $_GET['filter_role'] : '',
     'filter_intervenant' => isset($_GET['filter_intervenant']) ? $_GET['filter_intervenant'] : '',
 ]);
