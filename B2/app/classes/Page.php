@@ -291,7 +291,7 @@ public function editStatut($id, $data)
 public function editType($id, $data)
 {
     try {
-        $sql = "UPDATE 'Type' SET Nom = :nom WHERE ID_Type = :id";
+        $sql = "UPDATE Type SET Nom = :nom WHERE ID_Type = :id";
         $stmt = $this->link->prepare($sql);
         $stmt->bindValue(':nom', $data['nom'], \PDO::PARAM_STR);
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
@@ -305,11 +305,17 @@ public function editType($id, $data)
 
 public function editUrgence($id, $data)
 {
-    $sql = "UPDATE Urgence SET Niveau = :niveau WHERE ID_Urgence = :id";
-    $stmt = $this->link->prepare($sql);
-    $stmt->bindValue(':niveau', $data['niveau'], \PDO::PARAM_STR);
-    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
-    $stmt->execute();
+        try {
+        $sql = "UPDATE Urgence SET Niveau = :niveau WHERE ID_Urgence = :id";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindValue(':niveau', $data['niveau'], \PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return true;
+    } catch (\PDOException $e) {
+        return false;
+}
 }
 
 public function deleteStatut($id)
