@@ -1,4 +1,8 @@
  
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
 .background-image {
     position: relative;
 }
