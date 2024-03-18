@@ -349,6 +349,22 @@ public function deleteUrgence($id)
         return $this->twig->render($name, $data);
     }
  
+    public function countInterventionsEnCoursByIntervenant($intervenantId)
+    {
+        $sql = "SELECT COUNT(*) FROM Intervention WHERE ID_Intervenant = :intervenantId AND ID_Statut != 4";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
+        $sth->execute();
+        return $sth->fetchColumn();
+    }
+    
+    public function countAllInterventionsEnCours()
+    {
+        $sql = "SELECT COUNT(*) FROM Intervention WHERE ID_Statut != 4";
+        $sth = $this->link->query($sql);
+        return $sth->fetchColumn();
+    }
+    
 
     public function insertStatut($name)
     {

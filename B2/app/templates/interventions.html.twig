@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Interventions en cours</h1>
-
+    {% if role == 'Admin' or role == 'Standardiste' %}
+        <p>Nombre total d'interventions en cours : {{ count_all_interventions_en_cours }}</p>
+    {% elseif role == 'Intervenant' %}
+        <p>Nombre d'interventions vous étant attribuées : {{ count_interventions_en_cours }}</p>
+    {% else %}
+        <p>Vos demandes d'intervention :</p>
+    {% endif %}
     <section>
-        <h2>Interventions</h2>
         <form action="" method="get">
             <label for="filter_intervenant">Filtrer par intervenant :</label>
             <select name="filter_intervenant" id="filter_intervenant">
