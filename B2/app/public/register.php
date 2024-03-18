@@ -20,10 +20,9 @@ if(isset($_POST['send'])) {
             'telephone'    => $_POST['telephone']
         ]);
 
-        if ($inserted) {
-            header("Location: index.php");
-            exit(); 
-        }  
+        header("Location: index.php?msg=Compte créé avec succès");
+        exit(); 
+  
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) {
             $msg = "Cette adresse e-mail est déjà associée à un compte.";
