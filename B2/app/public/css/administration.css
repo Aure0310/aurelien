@@ -31,3 +31,29 @@ th {
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
+.bouton-normal {
+    background-color: #71C5F5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bouton-danger {
+    background-color: #FC6B51;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ .bouton-normal:hover {
+    background-color: #43B4F5;  
+}
+
+.bouton-danger:hover {
+    background-color: #FD4929; 
+}

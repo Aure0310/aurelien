@@ -89,8 +89,46 @@ button[type="submit"]:hover {
 .info-container {
     width: 40%;
     margin-left: 20px;
-    padding: 20px;
+    max-height: 300px; 
+    padding: 40px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 55px;
+}
+
+.info-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.info-item label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.info-item p {
+    margin-left: 10px;
+}
+
+.info-item p:first-child {
+    margin-top: 0;
+}
+
+.info-item p:last-child {
+    margin-bottom: 0;
+}
+
+.info-item .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }

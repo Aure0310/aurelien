@@ -352,4 +352,11 @@ public function deleteUrgence($id)
         $stmt->execute();
     }
 
+    public function deleteUsers($id)
+{
+    $sql = "DELETE FROM users WHERE id = :id";
+    $sth = $this->link->prepare($sql);
+    $sth->execute(['id' => $id]);
+}
+
 }

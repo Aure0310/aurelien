@@ -61,11 +61,28 @@
         </div>
         
         <div class="info-container">
-            <h2>Informations sur le client :</h2>
-            <p>Nom : {{ client.nom }}</p>
-            <p>Prénom : {{ client.prenom }}</p>
-            <p>Adresse : {{ client.adresse }}</p>
-            <p>Téléphone : {{ client.telephone }}</p>
-        </div>
+    <h2>Informations sur le client :</h2>
+    <div class="info-item">
+        <span class="icon">&#9742;</span>
+        <label>Nom :</label>
+        <p>{{ client.nom }}</p>
+    </div>
+    <div class="info-item">
+        <span class="icon">&#128100;</span>
+        <label>Prénom :</label>
+        <p>{{ client.prenom }}</p>
+    </div>
+    <div class="info-item">
+        <span class="icon">&#127968;</span>
+        <label>Adresse :</label>
+        <p>{{ client.adresse }}</p>
+    </div>
+    <div class="info-item">
+        <span class="icon">&#128222;</span>
+        <label>Téléphone :</label>
+        <p>{{ client.telephone }}</p>
+    </div>
+</div>
+
     </div>
 {% endblock %}
