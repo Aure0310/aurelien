@@ -1,20 +1,25 @@
 {% extends "base_auth.html.twig" %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="css/nouvelle_urgence.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="css/modifier.css">
 {% endblock %}
 
 {% block body %}
     {% include 'navbar.html.twig' %}
     <h1>Nouvelle Urgence</h1>
+    <div class="container">
+        <div class="box">
 
-    <form action="" method="post">
-        <label for="niveau">Nom du Niveau :</label>
-        <input type="text" id="niveau" name="niveau" required>
+            <form action="" method="post">
+                <label for="niveau">Nom du Niveau :</label>
+                <input type="text" id="niveau" name="niveau" required>
         
-        <button type="submit">Créer</button>
-    </form>
-
+            <button type="submit">Créer</button>
+        </form>
+        </div>
+    </div>
     {% if msg %}
         <p>{{ msg }}</p>
     {% endif %}

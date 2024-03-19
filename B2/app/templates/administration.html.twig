@@ -1,6 +1,8 @@
 {% extends "base_auth.html.twig" %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
+
     <link rel="stylesheet" href="css/administration.css">
 {% endblock %}
 
@@ -16,7 +18,7 @@
                 <option value="{{ role }}" {% if filter_role == role %}selected{% endif %}>{{ role }}</option>
             {% endfor %}
         </select>
-        <button type="submit">Filtrer</button>
+            <button type="submit" class="filter-button">Filtrer</button>
     </form>
 
     <section>
@@ -55,8 +57,8 @@
     </section>
 
     <section>
-        <h2>Statuts</h2>
-        <a href="nouveau_statut.php"><button>Créer</button></a> 
+        <h2>Statuts <a href="nouveau_statut.php"><button class="bouton-normal">Créer</button></a> </h2>
+         
         <table>
             <thead>
                 <tr>
@@ -82,8 +84,8 @@
     </section>
 
     <section>
-        <h2>Types</h2>
-        <a href="nouveau_type.php"><button>Créer</button></a>
+        <h2>Types <a href="nouveau_type.php"><button class="bouton-normal">Créer</button></a></h2>
+         
         <table>
             <thead>
                 <tr>
@@ -109,9 +111,8 @@
     </section>
 
     <section>
-        <h2>Urgences</h2>
-        <a href="nouvelle_urgence.php"><button>Créer</button></a>
-        <table>
+        <h2>Urgences <a href="nouvelle_urgence.php"><button class="bouton-normal">Créer</button></a></h2>
+         <table>
             <thead>
                 <tr>
                     <th>ID_Urgence</th>

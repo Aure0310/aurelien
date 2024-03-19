@@ -19,6 +19,10 @@ if ($page->session->isConnected()) {
 
         $isStandardiste = $page->session->hasRole('Standardiste');
         $isAdmin = $page->session->hasRole('Admin');
+        $isClient = $page->session->hasRole('Client');
+        $isIntervenant = $page->session->hasRole('Intervenant');
+
+
     } else {
         $msg = "Utilisateur introuvable dans la base de données.";
     }
@@ -37,4 +41,6 @@ if ($page->session->isConnected()) {
     ['msg' => $msg,
     'isStandardiste' => $isStandardiste,
     'isAdmin'        => $isAdmin,
+    'isClient'        => $isClient,
+    'isIntervenant'   => $isIntervenant,
     ]);

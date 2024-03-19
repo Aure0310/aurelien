@@ -5,9 +5,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     background-color: #f7f7f7;
 }
+ 
+
 
 .container {
     display: flex;

@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 h1 {
@@ -27,7 +27,7 @@ input[type="text"] {
     margin-bottom: 15px;
     border: 1px solid #846565;
     border-radius: 10px;
-    box-sizing: border-box; /* Pour inclure le padding et le border dans la largeur */
+    box-sizing: border-box;  
 }
 
 button[type="submit"] {

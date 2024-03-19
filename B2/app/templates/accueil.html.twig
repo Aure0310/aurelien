@@ -5,37 +5,48 @@
 
     <link rel="stylesheet" href="css/accueil.css">
 {% endblock %}
-
 {% block body %}
-    <div class="background-image">
-        <img class="background-image" src="img/accueil.jpg" alt="Eolienne">
-        <div class="content">
-            <div class="overlay">
-                <h1>Bienvenue sur Accord Energie</h1>
-           
-                {% if isClients %}
-                    <p>Bienvenue dans votre espace personnel dédié. Ici, vous avez un accès privilégié pour suivre toutes vos demandes d'intervention en cours et surveiller leur évolution. Nous mettons à votre disposition toutes les informations nécessaires afin que vous restiez constamment informé(e) du progrès de vos requêtes. Si jamais des questions ou des préoccupations surgissent, n'hésitez surtout pas à nous contacter. Nous sommes là pour vous aider et répondre à toutes vos interrogations.</p>
-                {% endif %}
-
-                {% if isStandardiste %}
-                    <p> Bienvenue dans notre espace de gestion des interventions. Ici, vous avez la possibilité de créer de nouvelles demandes d'intervention pour nos techniciens, ainsi que de suivre celles que vous avez déjà initiées. Nous vous encourageons vivement à fournir toutes les informations pertinentes afin de garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à inclure des notes ou des détails supplémentaires qui pourraient faciliter le processus et améliorer la qualité du service rendu. Nous sommes là pour vous accompagner à chaque étape et répondre à vos besoins.</p>
-                {% endif %}
-
-                {% if isAdmin %}
-                    <p> Bonjour et bienvenue dans l'interface d'administration. En tant qu'administrateur, vous avez un accès complet au système. Vous pouvez gérer les utilisateurs, modifier les informations, et contrôler les niveaux d'urgence et les statuts des interventions. N'hésitez pas à explorer toutes les options disponibles pour maintenir le bon fonctionnement du système.</p>
-                {% endif %}
-
-                {% if isIntervenant %}
-                    <p> Bienvenue dans notre espace de gestion des interventions. Vous pouvez créer de nouvelles interventions pour nos techniciens et suivre celles que vous avez créées. Assurez-vous de fournir toutes les informations nécessaires pour garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à ajouter des notes ou des détails supplémentaires pour faciliter le processus.</p>
-                {% endif %}
-
-                {% if isStandardiste or isAdmin %}
-                    <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
-                {% endif %}
+    <div class="main-content">
+         <div class="background-image">
+             <div class="content">
+                <div class="overlay">
+                    <h1>Bienvenue sur Accord Energie</h1>
                 
-               <p><a href="logout.php" class="bouton-deconnexion">Déconnexion</a></p>  
+                    {% if isClient %}
+                        <p>Bienvenue dans votre espace personnel dédié. Ici, vous avez un accès privilégié pour suivre toutes vos demandes d'intervention en cours et surveiller leur évolution. Nous mettons à votre disposition toutes les informations nécessaires afin que vous restiez constamment informé(e) du progrès de vos requêtes. Si jamais des questions ou des préoccupations surgissent, n'hésitez surtout pas à nous contacter. Nous sommes là pour vous aider et répondre à toutes vos interrogations.</p>
+                    {% endif %}
+
+                    {% if isStandardiste %}
+                        <p> Bienvenue dans notre espace de gestion des interventions. Ici, vous avez la possibilité de créer de nouvelles demandes d'intervention pour nos techniciens, ainsi que de suivre celles que vous avez déjà initiées. Nous vous encourageons vivement à fournir toutes les informations pertinentes afin de garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à inclure des notes ou des détails supplémentaires qui pourraient faciliter le processus et améliorer la qualité du service rendu. Nous sommes là pour vous accompagner à chaque étape et répondre à vos besoins.</p>
+                    {% endif %}
+
+                    {% if isAdmin %}
+                        <p> Bonjour et bienvenue dans l'interface d'administration. En tant qu'administrateur, vous avez un accès complet au système. Vous pouvez gérer les utilisateurs, modifier les informations, et contrôler les niveaux d'urgence et les statuts des interventions. N'hésitez pas à explorer toutes les options disponibles pour maintenir le bon fonctionnement du système.</p>
+                    {% endif %}
+
+                    {% if isIntervenant %}
+                        <p> Bienvenue dans notre espace de gestion des interventions. Vous pouvez créer de nouvelles interventions pour nos techniciens et suivre celles que vous avez créées. Assurez-vous de fournir toutes les informations nécessaires pour garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à ajouter des notes ou des détails supplémentaires pour faciliter le processus.</p>
+                    {% endif %}
+
+                    {% if isStandardiste or isAdmin %}
+                        <a href="addintervention.php" class="bouton-creer-intervention">Créer une intervention</a>
+                    {% endif %}
+                    
+                <p><a href="logout.php" class="bouton-deconnexion">Déconnexion</a></p>  
+                </div>
             </div>
+             
         </div>
-         
     </div>
+    <footer class="footer">
+        <div class="contact-info">
+            <h3>Nous Contacter</h3>
+            <p>Adresse : 10 Rue Sextius Michel,Parsi, France</p>
+            <p>Téléphone : +33 07 45 63 85</p>
+            <p>Email : contact@accordenergie.com</p>
+        </div>
+        <div class="map">
+            <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=10%20Rue%20Sextus%20Michel%2075015+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps devices</a></iframe>
+        </div>
+    </footer>
 {% endblock %}

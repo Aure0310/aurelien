@@ -1,3 +1,6 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
 table {
     width: 100%;
     border-collapse: collapse;
@@ -5,17 +8,65 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #0b0b0b;
     padding: 8px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #2A3A65;
+    color: #ffffff
 }
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: #f0f3f6;
     cursor: pointer;
+}
+
+
+.filter-button {
+    background-color: #956A55;  
+    color: white;  
+    padding: 10px 20px;  
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px;  
+    transition: background-color 0.3s;  
+}
+
+.filter-button:hover {
+    background-color: #A58372;  
+}
+
+select {
+    width: 30%; 
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc;  
+    border-radius: 10px; 
+    box-sizing: border-box;  
+    background-color: #f8f8f8;  
+    appearance: none;  
+    cursor: pointer;  
+}
+
+ select:hover {
+    border-color: #aaa;  
+}
+
+ select:focus {
+    outline: none;  
+    border-color: #061f50;  
+}
+
+ option {
+    padding: 5px; 
+    font-size: 16px; 
+    cursor: pointer;  
+}
+
+ option:hover {
+    background-color: #ddd; 
 }

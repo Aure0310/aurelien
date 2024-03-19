@@ -1,12 +1,14 @@
 {% extends "base_auth.html.twig" %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
+
     <link rel="stylesheet" href="css/interventions.css">
 {% endblock %}
 
 {% block body %}
     {% if role == 'Admin' or role == 'Standardiste' %}
-        <p>Nombre total d'interventions en cours : {{ count_all_interventions_en_cours }}</p>
+        <h2>Nombre total d'interventions en cours : {{ count_all_interventions_en_cours }}</h2>
     {% elseif role == 'Intervenant' %}
         <p>Nombre d'interventions vous étant attribuées : {{ count_interventions_en_cours }}</p>
     {% else %}
@@ -26,7 +28,8 @@
                     {% endif %}
                 {% endfor %}
             </select>
-            <button type="submit">Filtrer</button>
+            <button type="submit" class="filter-button">Filtrer</button>
+
         </form>
     {% endif %}
 
