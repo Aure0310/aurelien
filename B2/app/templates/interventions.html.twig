@@ -13,6 +13,7 @@
         <p>Vos demandes d'intervention :</p>
     {% endif %}
     <section>
+    {% if role == 'Admin' or role == 'Standardiste' %}
         <form action="" method="get">
             <label for="filter_intervenant">Filtrer par intervenant :</label>
             <select name="filter_intervenant" id="filter_intervenant">
@@ -27,6 +28,8 @@
             </select>
             <button type="submit">Filtrer</button>
         </form>
+    {% endif %}
+
 
         {% if interventions %}
             <table>
