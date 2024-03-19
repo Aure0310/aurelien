@@ -26,19 +26,18 @@
                     {% endfor %}
                 </select>
 
-                <div id="intervenant2-div" class="form-div" {% if not intervention.ID_Intervenant2 %}style="display: none;"{% endif %}>
-                    <label for="intervenant2" class="form-label">Intervenant secondaire :</label>
-                    <select id="intervenant2" name="intervenant2" class="form-select">
-                        <option value="">Sélectionnez un intervenant</option>
-                        {% for intervenant in intervenants %}
-                            {% if intervenant.id != intervention.ID_Intervenant2 %}
-                                <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
-                            {% else %}
-                                <option value="{{ intervenant.id }}" selected>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
+                <div id="intervenant2-div" class="form-div">
+                        <label for="intervenant2" class="form-label">Intervenant secondaire :</label>
+                        <select id="intervenant2" name="intervenant2" class="form-select">
+                            <option value="">Sélectionnez un intervenant</option>
+                            {% for intervenant in intervenants %}
+                                {# Ne pas inclure l'intervenant principal dans la liste des intervenants secondaires #}
+                                {% if intervenant.id != intervention.ID_Intervenant %}
+                                    <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant2 %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
 
                 <label for="date">Date :</label>
                 <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
