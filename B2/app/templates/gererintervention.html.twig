@@ -25,6 +25,17 @@
                         {% endfor %}
                     </select>
 
+                    {% if intervention.ID_Intervenant2 is defined %}
+                        <div id="intervenant2-div" class="form-div">
+                            <label for="intervenant2" class="form-label">Intervenant secondaire :</label>
+                            <select id="intervenant2" name="intervenant2" class="form-select">
+                                {% for intervenant in intervenants %}
+                                    <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant2 %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+
                     <label for="date">Date :</label>
                     <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
 
@@ -61,26 +72,27 @@
         </div>
         
         <div class="info-container">
-    <h2>Informations sur le client :</h2>
-    <div class="info-item">
-        <span class="icon">&#9742;</span>
-        <label>Nom :</label>
-        <p>{{ client.nom }}</p>
+            <h2>Informations sur le client :</h2>
+            <div class="info-item">
+                <span class="icon">&#9742;</span>
+                <label>Nom :</label>
+                <p>{{ client.nom }}</p>
+            </div>
+            <div class="info-item">
+                <span class="icon">&#128100;</span>
+                <label>Prénom :</label>
+                <p>{{ client.prenom }}</p>
+            </div>
+            <div class="info-item">
+                <span class="icon">&#127968;</span>
+                <label>Adresse :</label>
+                <p>{{ client.adresse }}</p>
+            </div>
+            <div class="info-item">
+                <span class="icon">&#128222;</span>
+                <label>Téléphone :</label>
+                <p>{{ client.telephone }}</p>
+            </div>
+        </div>
     </div>
-    <div class="info-item">
-        <span class="icon">&#128100;</span>
-        <label>Prénom :</label>
-        <p>{{ client.prenom }}</p>
-    </div>
-    <div class="info-item">
-        <span class="icon">&#127968;</span>
-        <label>Adresse :</label>
-        <p>{{ client.adresse }}</p>
-    </div>
-    <div class="info-item">
-        <span class="icon">&#128222;</span>
-        <label>Téléphone :</label>
-        <p>{{ client.telephone }}</p>
-    </div>
-</div>
 {% endblock %}

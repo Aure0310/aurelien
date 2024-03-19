@@ -41,6 +41,7 @@
                         <th>Date</th>
                         <th>Type</th>
                         <th>Intervenant</th>
+                        <th>Intervenant secondaire</th>
                         {% if role != 'Client' %}
                             <th>Action</th>
                         {% endif %}
@@ -61,6 +62,17 @@
                                      <p>{{ intervenant.nom }} {{ intervenant.prenom }}</p>
                                     {% endif %}
                                     {% endfor %}
+                                </td>
+                                <td>
+                                {% if intervention.ID_Intervenant2 %}
+                                    {% for intervenant in intervenants %}
+                                        {% if intervenant.id == intervention.ID_Intervenant2 %}
+                                            {{ intervenant.nom }} {{ intervenant.prenom }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    -
+                                {% endif %}
                                 </td>
                                 {% if role != 'Client' %}
                                     <td>
@@ -89,6 +101,7 @@
                         <th>Date</th>
                         <th>Type</th>
                         <th>Intervenant</th>
+                        <th>Intervenant secondaire</th>
                         {% if role != 'Client' %}
                             <th>Action</th>
                         {% endif %}
@@ -109,6 +122,17 @@
                                      <p>{{ intervenant.nom }} {{ intervenant.prenom }}</p>
                                     {% endif %}
                                     {% endfor %}
+                                </td>
+                                <td>
+                                {% if intervention.ID_Intervenant2 %}
+                                    {% for intervenant in intervenants %}
+                                        {% if intervenant.id == intervention.ID_Intervenant2 %}
+                                            {{ intervenant.nom }} {{ intervenant.prenom }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    -
+                                {% endif %}
                                 </td>
                                 {% if role != 'Client' %}
                                     <td>

@@ -114,7 +114,7 @@ class Page
         return $roles;
     }
 
-    public function getInterventionsByUser($userId, $filter_intervenant = '')
+public function getInterventionsByUser($userId, $filter_intervenant = '')
 {
     if ($this->session->hasRole('Admin')) {
         $sql = "
@@ -174,7 +174,7 @@ class Page
 
     public function insertIntervention(array $data)
     {
-        $sql = 'INSERT INTO Intervention (ID_Client, ID_Intervenant, Date, Commentaire, ID_Type, ID_Statut, ID_Urgence) VALUES (:ID_Client, :ID_Intervenant, :Date, :Commentaire, :ID_Type, :ID_Statut, :ID_Urgence)';
+        $sql = 'INSERT INTO Intervention (ID_Client, ID_Intervenant, ID_Intervenant2, Date, Commentaire, ID_Type, ID_Statut, ID_Urgence) VALUES (:ID_Client, :ID_Intervenant, :ID_Intervenant2, :Date, :Commentaire, :ID_Type, :ID_Statut, :ID_Urgence)';
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
     }
@@ -183,37 +183,40 @@ class Page
     public function getInterventionDetails($interventionId)
     {
         $sql = "SELECT i.*, u.Nom AS IntervenantNom, u.Prenom AS IntervenantPrenom,
+                    u2.Nom AS Intervenant2Nom, u2.Prenom AS Intervenant2Prenom,
                     c.Nom AS ClientNom, c.Prenom AS ClientPrenom,
                     t.Nom AS TypeNom, s.Nom AS StatutNom, urg.Niveau AS UrgenceNiveau
                 FROM Intervention i
                 JOIN users u ON i.ID_Intervenant = u.ID
+                LEFT JOIN users u2 ON i.ID_Intervenant2 = u2.ID
                 JOIN users c ON i.ID_Client = c.ID
                 JOIN Type t ON i.ID_Type = t.ID_Type
                 JOIN Statut s ON i.ID_Statut = s.ID_Statut
                 JOIN Urgence urg ON i.ID_Urgence = urg.ID_Urgence
                 WHERE i.ID = :interventionId";
-        
+    
         $sth = $this->link->prepare($sql);
         $sth->bindParam(':interventionId', $interventionId, \PDO::PARAM_INT);
         $sth->execute();
-
+    
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
-
-public function updateIntervention($id, $data)
-{
-    $sql = "UPDATE Intervention SET
+    
+    public function updateIntervention($id, $data)
+    {
+        $sql = "UPDATE Intervention SET
                     ID_Client = :ID_Client,
                     ID_Intervenant = :ID_Intervenant,
+                    ID_Intervenant2 = :ID_Intervenant2,
                     Date = :Date,
                     Commentaire = :Commentaire,
                     ID_Type = :ID_Type,
                     ID_Statut = :ID_Statut,
                     ID_Urgence = :ID_Urgence
-                    WHERE ID = :ID";
-
-    return $this->link->prepare($sql)->execute(array_merge($data, [':ID' => $id]));
-}
+                WHERE ID = :ID";
+    
+        return $this->link->prepare($sql)->execute(array_merge($data, [':ID' => $id]));
+    }
 
 public function updateUserRole($data)
 {
