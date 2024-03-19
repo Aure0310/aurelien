@@ -1,5 +1,3 @@
-{# administration.html.twig #}
-
 {% extends "base_auth.html.twig" %}
 
 {% block stylesheets %}
@@ -47,7 +45,7 @@
                             </td>
                             <td>
                                 <button type="submit" name="user_id" value="{{ user.id }}" class="bouton-normal">Modifier le rôle</button>
-                                <a href="supprimer_utilisateur.php?id={{ user.id }}"><button class="bouton-danger" value="{{ user.id }}">Supprimer</button></a>
+                                <a href="supprimer_utilisateur.php?id={{ user.id }}"><button type="submit" name="" value="{{ user.id }}" class="bouton-danger">Supprimer</button></a>
                             </td>
                         </tr>
                     {% endfor %}

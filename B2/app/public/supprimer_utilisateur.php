@@ -6,15 +6,13 @@ use App\Page;
 
 $page = new Page();
 
-if (isset($_GET['id'])) {
-    $user_id = $_GET['id'];
+if ($page->session->isConnected() && $page->session->hasRole('Admin')) {
+    if (isset($_GET['id'])) {
+        $user_id = $_GET['id'];
 
-    if ($page->deleteUsers($user_id)) {
-        header("Location: administration.php");
+        if ($page->deleteUsers($user_id)) {
+        }
+        header('Location: administration.php');
         exit();
-    } else {
-        echo "Erreur lors de la suppression de l'utilisateur.";
     }
-} else {
-    echo "ID de l'utilisateur non spécifié.";
-}
+} 

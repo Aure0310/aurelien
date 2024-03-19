@@ -38,7 +38,9 @@
                         <th>Date</th>
                         <th>Type</th>
                         <th>Intervenant</th>
-                        <th>Action</th>
+                        {% if role != 'Client' %}
+                            <th>Action</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -57,9 +59,11 @@
                                     {% endif %}
                                     {% endfor %}
                                 </td>
-                                <td>
-                                    <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
-                                </td>
+                                {% if role != 'Client' %}
+                                    <td>
+                                        <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -82,7 +86,9 @@
                         <th>Date</th>
                         <th>Type</th>
                         <th>Intervenant</th>
-                        <th>Action</th>
+                        {% if role != 'Client' %}
+                            <th>Action</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -101,9 +107,11 @@
                                     {% endif %}
                                     {% endfor %}
                                 </td>
-                                <td>
-                                    <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
-                                </td>
+                                {% if role != 'Client' %}
+                                    <td>
+                                        <a href="gererintervention.php?id={{ intervention.ID }}">Gérer</a>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -113,5 +121,3 @@
             <p>Aucune intervention en cours.</p>
         {% endif %}
 {% endblock %}
-
-
