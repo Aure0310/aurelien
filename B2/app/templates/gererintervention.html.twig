@@ -2,99 +2,145 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
-
     <link rel="stylesheet" href="css/gererintervention.css">
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="form-container">
-            <h1>Gérer l'intervention</h1>
+<div class="container">
+    <div class="form-container">
+        <h1>Gérer l'intervention</h1>
 
-            {% if intervention %}
-                <form action="gererintervention.php?id={{ intervention.ID }}" method="post">
-                    <label for="client">Client :</label>
-                    <select id="client" name="client" required>
-                        {% for client in clients %}
-                            <option value="{{ client.id }}" {% if client.id == intervention.ID_Client %}selected{% endif %}>{{ client.nom }} {{ client.prenom }}</option>
-                        {% endfor %}
-                    </select>
+        {% if intervention %}
+            <form action="gererintervention.php?id={{ intervention.ID }}" method="post">
+                <label for="client">Client :</label>
+                <select id="client" name="client" required>
+                    {% for client in clients %}
+                        <option value="{{ client.id }}" {% if client.id == intervention.ID_Client %}selected{% endif %}>{{ client.nom }} {{ client.prenom }}</option>
+                    {% endfor %}
+                </select>
 
-                    <label for="intervenant">Intervenant :</label>
-                    <select id="intervenant" name="intervenant" required>
+                <label for="intervenant">Intervenant :</label>
+                <select id="intervenant" name="intervenant" required>
+                    {% for intervenant in intervenants %}
+                        <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                    {% endfor %}
+                </select>
+
+                <div id="intervenant2-div" class="form-div" {% if not intervention.ID_Intervenant2 %}style="display: none;"{% endif %}>
+                    <label for="intervenant2" class="form-label">Intervenant secondaire :</label>
+                    <select id="intervenant2" name="intervenant2" class="form-select">
+                        <option value="">Sélectionnez un intervenant</option>
                         {% for intervenant in intervenants %}
-                            <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                            {% if intervenant.id != intervention.ID_Intervenant2 %}
+                                <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                            {% else %}
+                                <option value="{{ intervenant.id }}" selected>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
+                </div>
 
-                    {% if intervention.ID_Intervenant2 is defined %}
-                        <div id="intervenant2-div" class="form-div">
-                            <label for="intervenant2" class="form-label">Intervenant secondaire :</label>
-                            <select id="intervenant2" name="intervenant2" class="form-select">
-                                {% for intervenant in intervenants %}
-                                    <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant2 %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    {% endif %}
+                <label for="date">Date :</label>
+                <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
 
-                    <label for="date">Date :</label>
-                    <input type="date" name="date" value="{{ intervention.Date|date('Y-m-d') }}" required>
+                <label for="intervention_type">Type d'intervention :</label>
+                <select name="intervention_type" required>
+                    {% for type in types %}
+                        <option value="{{ type.ID_Type }}" {% if type.ID_Type == intervention.ID_Type %}selected{% endif %}>{{ type.Nom }}</option>
+                    {% endfor %}
+                </select>
 
+                <label for="comment">Commentaire :</label>
+                <textarea name="comment">{{ intervention.Commentaire }}</textarea>
 
-                    <label for="intervention_type">Type d'intervention :</label>
-                    <select name="intervention_type" required>
-                        {% for type in types %}
-                            <option value="{{ type.ID_Type }}" {% if type.ID_Type == intervention.ID_Type %}selected{% endif %}>{{ type.Nom }}</option>
-                        {% endfor %}
-                    </select>
+                <label for="intervention_statut">Statut :</label>
+                <select name="intervention_statut" required>
+                    {% for statut in statuts %}
+                        <option value="{{ statut.ID_Statut }}" {% if statut.ID_Statut == intervention.ID_Statut %}selected{% endif %}>{{ statut.Nom }}</option>
+                    {% endfor %}
+                </select>
 
-                    <label for="comment">Commentaire :</label>
-                    <textarea name="comment">{{ intervention.Commentaire }}</textarea>
+                <label for="intervention_urgence">Urgence :</label>
+                <select name="intervention_urgence" required>
+                    {% for urgence in urgences %}
+                        <option value="{{ urgence.ID_Urgence }}" {% if urgence.ID_Urgence == intervention.ID_Urgence %}selected{% endif %}>{{ urgence.Niveau }}</option>
+                    {% endfor %}
+                </select>
 
-                    <label for="intervention_statut">Statut :</label>
-                    <select name="intervention_statut" required>
-                        {% for statut in statuts %}
-                            <option value="{{ statut.ID_Statut }}" {% if statut.ID_Statut == intervention.ID_Statut %}selected{% endif %}>{{ statut.Nom }}</option>
-                        {% endfor %}
-                    </select>
+                <button type="submit">Modifier</button>
+                <a href="supprimer_intervention.php?id={{ intervention.ID }}" class="delete-button">Supprimer</a>
+            </form>
+        {% else %}
+            <p>Intervention introuvable.</p>
+        {% endif %}
+    </div>
 
-                    <label for="intervention_urgence">Urgence :</label>
-                    <select name="intervention_urgence" required>
-                        {% for urgence in urgences %}
-                            <option value="{{ urgence.ID_Urgence }}" {% if urgence.ID_Urgence == intervention.ID_Urgence %}selected{% endif %}>{{ urgence.Niveau }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <button type="submit">Modifier</button>
-                </form>
-            {% else %}
-                <p>Intervention introuvable.</p>
-            {% endif %}
+    <div class="info-container">
+        <h2>Informations sur le client :</h2>
+        <div class="info-item">
+            <span class="icon">&#9742;</span>
+            <label>Nom :</label>
+            <p>{{ client.nom }}</p>
         </div>
-        
-        <div class="info-container">
-            <h2>Informations sur le client :</h2>
-            <div class="info-item">
-                <span class="icon">&#9742;</span>
-                <label>Nom :</label>
-                <p>{{ client.nom }}</p>
-            </div>
-            <div class="info-item">
-                <span class="icon">&#128100;</span>
-                <label>Prénom :</label>
-                <p>{{ client.prenom }}</p>
-            </div>
-            <div class="info-item">
-                <span class="icon">&#127968;</span>
-                <label>Adresse :</label>
-                <p>{{ client.adresse }}</p>
-            </div>
-            <div class="info-item">
-                <span class="icon">&#128222;</span>
-                <label>Téléphone :</label>
-                <p>{{ client.telephone }}</p>
-            </div>
+        <div class="info-item">
+            <span class="icon">&#128100;</span>
+            <label>Prénom :</label>
+            <p>{{ client.prenom }}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">&#127968;</span>
+            <label>Adresse :</label>
+            <p>{{ client.adresse }}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">&#128222;</span>
+            <label>Téléphone :</label>
+            <p>{{ client.telephone }}</p>
         </div>
     </div>
+</div>
+
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var intervenantSelect = document.getElementById('intervenant');
+    var intervenant2Div = document.getElementById('intervenant2-div');
+
+    intervenantSelect.addEventListener('change', function() {
+        var intervenantId = this.value;
+        var intervenant2Select = document.getElementById('intervenant2');
+
+        if (this.value !== '') {
+            intervenant2Div.style.display = 'block';
+            intervenant2Select.innerHTML = '';
+
+            var defaultOption = document.createElement('option');
+            defaultOption.text = 'Sélectionnez un intervenant';
+            defaultOption.value = '';
+            intervenant2Select.appendChild(defaultOption);
+
+            {% for intervenant in intervenants %}
+                if ('{{ intervenant.id }}' !== intervenantId) {
+                    var option = document.createElement('option');
+                    option.text = '{{ intervenant.nom }} {{ intervenant.prenom }}';
+                    option.value = '{{ intervenant.id }}';
+                    intervenant2Select.appendChild(option);
+                }
+            {% endfor %}
+        } else {
+            intervenant2Div.style.display = 'none';
+            intervenant2Select.innerHTML = '';
+        }
+    });
+
+    var form = document.getElementById('intervention-form');
+    form.addEventListener('submit', function(event) {
+        var intervenant2Select = document.getElementById('intervenant2');
+        if (intervenant2Select.value === '') {
+            intervenant2Select.value = null;
+        }
+    });
+});
+</script>
+
+
 {% endblock %}

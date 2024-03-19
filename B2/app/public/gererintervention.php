@@ -39,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $intervenant_id = isset($_POST['intervenant']) ? $_POST['intervenant'] : null;
     $intervenant_id2 = isset($_POST['intervenant2']) ? $_POST['intervenant2'] : null;
 
+    if (empty($_POST['intervenant2'])) {
+        $_POST['intervenant2'] = null;
+    }
+
     $data = [
         'ID_Client' => $client_id,
         'ID_Intervenant' => $intervenant_id,
