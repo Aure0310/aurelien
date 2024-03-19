@@ -13,23 +13,33 @@
     <form action="addintervention.php" method="post">
         <label for="client">Client :</label>
             <select id="client" name="client" required>
+            <option value="">Sélectionnez un client</option>
                 {% for client in clients %}
                     <option value="{{ client.id }}">{{ client.nom }} {{ client.prenom }}</option>
                 {% endfor %}
             </select>
-
-            <label for="intervenant">Intervenant :</label>
-            <select id="intervenant" name="intervenant" required>
+            
+            <label for="intervenant" class="form-label">Intervenant :</label>
+            <select id="intervenant" name="intervenant" class="form-select" required>
+                <option value="">Sélectionnez un intervenant</option>
                 {% for intervenant in intervenants %}
                     <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
                 {% endfor %}
             </select>
-
+            
+            <div id="intervenant2-div" class="form-div" style="display: none;">
+    <label for="intervenant2" class="form-label">Intervenant secondaire (facultatif) :</label>
+    <select id="intervenant2" name="intervenant2" class="form-select">
+        <option value="">Sélectionnez un intervenant</option>
+    </select>
+</div>
+            
         <label for="date">Date :</label>
         <input type="date" name="date" required>
 
         <label for="intervention_type">Type d'intervention :</label>
         <select name="intervention_type" required>
+        <option value="">Choisissez le type d'intervention</option>
             {% for type in types %}
                 <option value="{{ type.ID_Type }}">{{ type.Nom }}</option>
             {% endfor %}
@@ -47,6 +57,7 @@
 
         <label for="intervention_urgence">Urgence :</label>
         <select name="intervention_urgence" required>
+        <option value="">Choisissez l'urgence</option>
             {% for urgence in urgences %}
                 <option value="{{ urgence.ID_Urgence }}">{{ urgence.Niveau }}</option>
             {% endfor %}
@@ -65,6 +76,37 @@
                 window.location.href = 'interventions.php';
             }, 1750);
         </script>
-    {% endif %}
+        {% endif %}
+
+
+        <script>
+        document.getElementById('intervenant').addEventListener('change', function() {
+    var intervenantId = this.value;
+    var intervenantSecondaireDiv = document.getElementById('intervenant2-div');
+
+    if (this.value !== '') {
+        intervenantSecondaireDiv.style.display = 'block';
+        
+        var intervenantSecondaireSelect = document.getElementById('intervenant2');
+        intervenantSecondaireSelect.innerHTML = '';
+
+        var option = document.createElement('option');
+        option.text = 'Sélectionnez un intervenant';
+        option.value = '';
+        intervenantSecondaireSelect.appendChild(option);
+
+        {% for intervenant in intervenants %}
+            if ('{{ intervenant.id }}' !== intervenantId) {
+                var option = document.createElement('option');
+                option.text = '{{ intervenant.nom }} {{ intervenant.prenom }}';
+                option.value = '{{ intervenant.id }}';
+                intervenantSecondaireSelect.appendChild(option);
+            }
+        {% endfor %}
+    } else {
+        intervenantSecondaireDiv.style.display = 'none';
+    }
+});
+        </script>
 
 {% endblock %}

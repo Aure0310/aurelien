@@ -22,11 +22,7 @@ form {
     gap: 20px;
 }
 
-label {
-    margin-bottom: 5px;
-    color: #2A3A65;
-    font-weight: bold;
-}
+
 
 input,
 select {
@@ -59,3 +55,43 @@ button:hover {
     text-align: center;
 }
 
+#intervenant-secondaire-div {
+    display: none;
+}
+
+#intervenant-secondaire-div label {
+    margin-bottom: 5px;
+    color: #2A3A65;
+    font-weight: bold;
+}
+
+#intervenant-secondaire {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Utilisation d'une grille flexible */
+    grid-gap: 10px; /* Espacement entre les colonnes */
+}
+
+.form-col {
+    display: flex;
+    flex-direction: column; /* Les éléments à l'intérieur seront disposés verticalement */
+}
+
+label {
+    margin-bottom: 5px;
+    color: #2A3A65;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
