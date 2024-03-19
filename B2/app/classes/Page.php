@@ -160,7 +160,7 @@ public function getInterventionsByUser($userId, $filter_intervenant = '')
                 JOIN Statut ON Intervention.ID_Statut = Statut.ID_Statut
                 JOIN Urgence ON Intervention.ID_Urgence = Urgence.ID_Urgence
             WHERE 
-                ID_Client = :userId OR ID_Intervenant = :userId 
+                ID_Client = :userId OR ID_Intervenant = :userId OR ID_Intervenant2 = :userId
             ORDER BY 
                 Date ASC
         ";
@@ -364,9 +364,24 @@ public function deleteUsers($id)
     }
 }
 
+public function deleteIntervention($intervention_id)
+{
+    try {
+        $sql = "DELETE FROM Intervention WHERE ID = :intervention_id";
+
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindParam(':intervention_id', $intervention_id, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+    } catch (PDOException $e) {
+        echo "Erreur" . $e->getMessage();
+        return false;
+    }
+}
+
     public function countInterventionsEnCoursByIntervenant($intervenantId)
     {
-        $sql = "SELECT COUNT(*) FROM Intervention WHERE ID_Intervenant = :intervenantId AND ID_Statut != 4";
+        $sql = "SELECT COUNT(*) FROM Intervention WHERE (ID_Intervenant = :intervenantId OR ID_Intervenant2 = :intervenantId) AND ID_Statut != 4";
         $sth = $this->link->prepare($sql);
         $sth->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
         $sth->execute();

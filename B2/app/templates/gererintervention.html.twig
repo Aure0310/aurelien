@@ -31,7 +31,6 @@
                         <select id="intervenant2" name="intervenant2" class="form-select">
                             <option value="">Sélectionnez un intervenant</option>
                             {% for intervenant in intervenants %}
-                                {# Ne pas inclure l'intervenant principal dans la liste des intervenants secondaires #}
                                 {% if intervenant.id != intervention.ID_Intervenant %}
                                     <option value="{{ intervenant.id }}" {% if intervenant.id == intervention.ID_Intervenant2 %}selected{% endif %}>{{ intervenant.nom }} {{ intervenant.prenom }}</option>
                                 {% endif %}
@@ -67,7 +66,10 @@
                 </select>
 
                 <button type="submit">Modifier</button>
+            
+            {% if role != 'Intervenant' %}
                 <a href="supprimer_intervention.php?id={{ intervention.ID }}" class="delete-button">Supprimer</a>
+            {% endif %}
             </form>
         {% else %}
             <p>Intervention introuvable.</p>

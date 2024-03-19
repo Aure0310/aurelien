@@ -99,6 +99,7 @@ echo $page->render('navbar.html.twig', [
 
 echo $page->render('gererintervention.html.twig', [
     'msg' => $msg,
+    'role' => $role,
     'intervention' => $intervention,
     'client' => $client,  
     'clients' => $page->getAllClients(),
