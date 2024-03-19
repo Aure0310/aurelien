@@ -10,6 +10,9 @@ class Page
 
     function __construct()
     {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
         $this->session = new Session();
         $loader = new \Twig\Loader\FilesystemLoader('../templates');
         $this->twig = new \Twig\Environment($loader, [
@@ -343,12 +346,21 @@ public function deleteUrgence($id)
     $sth = $this->link->prepare($sql);
     $sth->execute(['id' => $id]);
 }
-
-    public function render(string $name, array $data) :string
-    {
-        return $this->twig->render($name, $data);
-    }
  
+public function deleteUsers($id)
+{
+    try {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sth->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
+        return false;
+    }
+}
+
     public function countInterventionsEnCoursByIntervenant($intervenantId)
     {
         $sql = "SELECT COUNT(*) FROM Intervention WHERE ID_Intervenant = :intervenantId AND ID_Statut != 4";
@@ -374,11 +386,9 @@ public function deleteUrgence($id)
         $stmt->execute();
     }
 
-    public function deleteUsers($id)
+public function render(string $name, array $data) :string
 {
-    $sql = "DELETE FROM users WHERE id = :id";
-    $sth = $this->link->prepare($sql);
-    $sth->execute(['id' => $id]);
+    return $this->twig->render($name, $data);
 }
 
 }

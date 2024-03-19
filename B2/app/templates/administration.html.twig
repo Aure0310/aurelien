@@ -46,9 +46,8 @@
                                 </select>
                             </td>
                             <td>
-                                <button type="submit" name="user_id" value="{{ user.id }}" class="bouton-normal">Modifier</button>
-                                <a href="supprimer_utilisateur.php?id={{ user.id }}"><button class="bouton-danger">Supprimer</button></a>
-
+                                <button type="submit" name="user_id" value="{{ user.id }}" class="bouton-normal">Modifier le rôle</button>
+                                <a href="supprimer_utilisateur.php?id={{ user.id }}"><button class="bouton-danger" value="{{ user.id }}">Supprimer</button></a>
                             </td>
                         </tr>
                     {% endfor %}
