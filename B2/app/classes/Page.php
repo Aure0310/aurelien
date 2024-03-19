@@ -116,7 +116,7 @@ class Page
 
 public function getInterventionsByUser($userId, $filter_intervenant = '')
 {
-    if ($this->session->hasRole('Admin')) {
+    if ($this->session->hasRole('Admin') || $this->session->hasRole('Standardiste')) {
         $sql = "
             SELECT 
                 Intervention.*,
