@@ -13,19 +13,19 @@
                     <h1>Bienvenue sur Accord Energie</h1>
                 
                     {% if isClient %}
-                        <p>Bienvenue dans votre espace personnel dédié. Ici, vous avez un accès privilégié pour suivre toutes vos demandes d'intervention en cours et surveiller leur évolution. Nous mettons à votre disposition toutes les informations nécessaires afin que vous restiez constamment informé(e) du progrès de vos requêtes. Si jamais des questions ou des préoccupations surgissent, n'hésitez surtout pas à nous contacter. Nous sommes là pour vous aider et répondre à toutes vos interrogations.</p>
+                        <p>Bienvenue dans votre espace personnel. Vous avez un accès privilégié pour suivre toutes vos demandes d'intervention en cours et surveiller leur évolution. Nous mettons à votre disposition toutes les informations nécessaires afin que vous restiez constamment informé du progrès de vos requêtes. Si jamais des questions ou des préoccupations surgissent, n'hésitez surtout pas à nous contacter. Nous sommes là pour vous aider et répondre à toutes vos interrogations.</p>
                     {% endif %}
 
                     {% if isStandardiste %}
-                        <p> Bienvenue dans notre espace de gestion des interventions. Ici, vous avez la possibilité de créer de nouvelles demandes d'intervention pour nos techniciens, ainsi que de suivre celles que vous avez déjà initiées. Nous vous encourageons vivement à fournir toutes les informations pertinentes afin de garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à inclure des notes ou des détails supplémentaires qui pourraient faciliter le processus et améliorer la qualité du service rendu. Nous sommes là pour vous accompagner à chaque étape et répondre à vos besoins.</p>
+                        <p> Bienvenue dans notre espace de gestion des interventions. Ici, vous avez la possibilité de créer de nouvelles demandes d'intervention pour les intervenant, ainsi que de suivre celles que vous avez déjà initiées. Nous vous encourageons vivement à fournir toutes les informations pertinentes afin de garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à inclure des notes ou des détails supplémentaires qui pourraient faciliter le processus et améliorer la qualité du service rendu. Nous sommes là pour vous accompagner à chaque étape et répondre à vos besoins.</p>
                     {% endif %}
 
                     {% if isAdmin %}
-                        <p> Bonjour et bienvenue dans l'interface d'administration. En tant qu'administrateur, vous avez un accès complet au système. Vous pouvez gérer les utilisateurs, modifier les informations, et contrôler les niveaux d'urgence et les statuts des interventions. N'hésitez pas à explorer toutes les options disponibles pour maintenir le bon fonctionnement du système.</p>
+                        <p> Bienvenue dans l'interface d'administration. En tant qu'administrateur, vous avez un accès complet au système. Vous pouvez gérer les utilisateurs, modifier les informations, et contrôler les niveaux d'urgence et les statuts des interventions. N'hésitez pas à explorer toutes les options disponibles pour maintenir le bon fonctionnement du système.</p>
                     {% endif %}
 
                     {% if isIntervenant %}
-                        <p> Bienvenue dans notre espace de gestion des interventions. Vous pouvez créer de nouvelles interventions pour nos techniciens et suivre celles que vous avez créées. Assurez-vous de fournir toutes les informations nécessaires pour garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à ajouter des notes ou des détails supplémentaires pour faciliter le processus.</p>
+    <p> Bienvenue dans notre espace de suivi des interventions. Vous pouvez consulter les interventions en cours et celles qui vous sont assignées. Assurez-vous de fournir toutes les informations nécessaires pour garantir une intervention rapide et efficace de nos équipes sur le terrain. N'hésitez pas à ajouter des notes ou des détails supplémentaires pour faciliter le processus.</p>
                     {% endif %}
 
                     {% if isStandardiste or isAdmin %}
