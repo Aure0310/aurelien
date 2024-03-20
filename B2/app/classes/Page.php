@@ -404,6 +404,22 @@ public function deleteIntervention($intervention_id)
         $stmt->execute();
     }
 
+    public function searchInterventionById($interventionId)
+{
+    $sql = "SELECT * FROM Intervention WHERE ID = :interventionId";
+    $stmt = $this->link->prepare($sql);
+    $stmt->execute(['interventionId' => $interventionId]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
+public function searchUserById(int $userId)
+{
+    $sql = "SELECT * FROM users WHERE id = :userId";
+    $stmt = $this->link->prepare($sql);
+    $stmt->execute(['userId' => $userId]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
 public function render(string $name, array $data) :string
 {
     return $this->twig->render($name, $data);

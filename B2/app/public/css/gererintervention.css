@@ -13,7 +13,7 @@ h1{
 }
 
  
-form {
+.container form {
     max-width: 600px;
     margin: 20px auto;
     background-color: #fff;
@@ -29,7 +29,7 @@ label {
 }
 
  
-input[type="text"],
+.container input[type="text"],
 input[type="date"],
 select,
 textarea {
@@ -50,7 +50,7 @@ textarea:focus {
 }
 
  
-button[type="submit"] {
+.container button[type="submit"] {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
@@ -74,7 +74,7 @@ button[type="submit"] {
 }
 
 
-button[type="submit"]:hover {
+.container button[type="submit"]:hover {
     background-color: #0056b3;
 }
 

@@ -1,0 +1,32 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/recherche.css">
+{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la recherche</h1>
+
+    {% if search_query %}
+        <p>Résultats pour la recherche : <strong>{{ search_query }}</strong></p>
+    {% endif %}
+
+    {% if search_results %}
+        {% for category, results in search_results %}
+            <h2>{{ category }}</h2>
+            <ul>
+                {% for result in results %}
+                    {% if category == 'Interventions' %}
+                        <li class="intervention">Intervention trouvée : {{ result.id }} (ID_Client: {{ result.ID_Client }}, ID_Intervenant: {{ result.ID_Intervenant }}, Date: {{ result.Date }})</li>
+                    {% elseif category == 'Utilisateurs' %}
+                        <li class="utilisateur">Utilisateur trouvé : ({{ result.email }}, {{ result.prenom }}, {{ result.nom }})</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+{% endblock %}

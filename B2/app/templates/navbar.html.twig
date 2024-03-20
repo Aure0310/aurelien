@@ -2,7 +2,6 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap">
-
     <link rel="stylesheet" href="css/navbar.css">
 {% endblock %}
 
@@ -14,7 +13,10 @@
             </a>
         </div>
         <div class="navbar-left">
-            <input type="text" placeholder="Rechercher" class="navbar-search">
+            <form action="recherche.php" method="get">
+                <input type="text" name="search_query" placeholder="Rechercher" class="navbar-search">
+                <button type="submit" class="navbar-search-button">Rechercher</button>
+            </form>
         </div>
         <div class="navbar-right">
             {% if role == 'Admin' %}

@@ -64,9 +64,7 @@
                         <option value="{{ urgence.ID_Urgence }}" {% if urgence.ID_Urgence == intervention.ID_Urgence %}selected{% endif %}>{{ urgence.Niveau }}</option>
                     {% endfor %}
                 </select>
-
-                <button type="submit">Modifier</button>
-            
+                    <button type="submit">Modifier</button>
             {% if role != 'Intervenant' %}
                 <a href="supprimer_intervention.php?id={{ intervention.ID }}" class="delete-button">Supprimer</a>
             {% endif %}
@@ -102,36 +100,36 @@
 </div>
 
         <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var intervenantSelect = document.getElementById('intervenant');
-    var intervenant2Div = document.getElementById('intervenant2-div');
+            document.addEventListener('DOMContentLoaded', function() {
+        var intervenantSelect = document.getElementById('intervenant');
+        var intervenant2Div = document.getElementById('intervenant2-div');
 
-    intervenantSelect.addEventListener('change', function() {
-        var intervenantId = this.value;
-        var intervenant2Select = document.getElementById('intervenant2');
+        intervenantSelect.addEventListener('change', function() {
+            var intervenantId = this.value;
+            var intervenant2Select = document.getElementById('intervenant2');
 
-        if (this.value !== '') {
-            intervenant2Div.style.display = 'block';
-            intervenant2Select.innerHTML = '';
+            if (this.value !== '') {
+                intervenant2Div.style.display = 'block';
+                intervenant2Select.innerHTML = '';
 
-            var defaultOption = document.createElement('option');
-            defaultOption.text = 'Sélectionnez un intervenant';
-            defaultOption.value = '';
-            intervenant2Select.appendChild(defaultOption);
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Sélectionnez un intervenant';
+                defaultOption.value = '';
+                intervenant2Select.appendChild(defaultOption);
 
-            {% for intervenant in intervenants %}
-                if ('{{ intervenant.id }}' !== intervenantId) {
-                    var option = document.createElement('option');
-                    option.text = '{{ intervenant.nom }} {{ intervenant.prenom }}';
-                    option.value = '{{ intervenant.id }}';
-                    intervenant2Select.appendChild(option);
-                }
-            {% endfor %}
-        } else {
-            intervenant2Div.style.display = 'none';
-            intervenant2Select.innerHTML = '';
-        }
-    });
+                {% for intervenant in intervenants %}
+                    if ('{{ intervenant.id }}' !== intervenantId) {
+                        var option = document.createElement('option');
+                        option.text = '{{ intervenant.nom }} {{ intervenant.prenom }}';
+                        option.value = '{{ intervenant.id }}';
+                        intervenant2Select.appendChild(option);
+                    }
+                {% endfor %}
+            } else {
+                intervenant2Div.style.display = 'none';
+                intervenant2Select.innerHTML = '';
+            }
+        });
 
     var form = document.getElementById('intervention-form');
     form.addEventListener('submit', function(event) {

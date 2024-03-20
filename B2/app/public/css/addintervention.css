@@ -32,7 +32,7 @@ select {
     border-radius: 4px;
 }
 
-button {
+.bouton button {
     width: 100%;
     padding: 10px;
     background-color: #2A3A65;

@@ -7,7 +7,7 @@ h1 {
     text-align: center;
 }
 
-form {
+.edit_form form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -16,12 +16,12 @@ form {
     background-color: #C8B4AA;
 }
 
-label {
+.edit_form label {
     display: block;
     margin-bottom: 5px;
 }
 
-input[type="text"] {
+.edit_form input[type="text"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -30,7 +30,7 @@ input[type="text"] {
     box-sizing: border-box;  
 }
 
-button[type="submit"] {
+.edit_form button[type="submit"] {
     width: 100%;
     padding: 10px;
     background-color: #956A55;
@@ -41,6 +41,6 @@ button[type="submit"] {
     transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
+.edit_form button[type="submit"]:hover {
     background-color: #A58372;
-}
+} 
