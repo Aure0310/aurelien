@@ -19,21 +19,8 @@
                 {% endfor %}
             </select>
             
-            <label for="intervenant" class="form-label">Intervenant :</label>
-            <select id="intervenant" name="intervenant" class="form-select" required>
-                <option value="">Sélectionnez un intervenant</option>
-                {% for intervenant in intervenants %}
-                    <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
-                {% endfor %}
-            </select>
-            
-            <div id="intervenant2-div" class="form-div" style="display: none;">
-    <label for="intervenant2" class="form-label">Intervenant secondaire (facultatif) :</label>
-    <select id="intervenant2" name="intervenant2" class="form-select">
-        <option value="">Sélectionnez un intervenant</option>
-    </select>
-</div>
-            
+
+        
         <label for="date">Date :</label>
         <input type="date" name="date" required>
 
@@ -62,6 +49,21 @@
                 <option value="{{ urgence.ID_Urgence }}">{{ urgence.Niveau }}</option>
             {% endfor %}
         </select>
+
+            <label for="intervenant" class="form-label">Intervenant :</label>
+            <select id="intervenant" name="intervenant" class="form-select" required>
+                <option value="">Sélectionnez un intervenant</option>
+                {% for intervenant in intervenants %}
+                    <option value="{{ intervenant.id }}">{{ intervenant.nom }} {{ intervenant.prenom }}</option>
+                {% endfor %}
+            </select>
+            
+            <div id="intervenant2-div" class="form-div" style="display: none;">
+                <label for="intervenant2" class="form-label">Intervenant secondaire (facultatif) :</label>
+                <select id="intervenant2" name="intervenant2" class="form-select">
+                    <option value="">Sélectionnez un intervenant</option>
+                </select>
+            </div>
 
         <button type="submit">Créer</button>
     </form>

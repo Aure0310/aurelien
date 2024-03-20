@@ -354,12 +354,12 @@ public function deleteUsers($id)
 {
     try {
         $sql = "DELETE FROM users WHERE id = :id";
-        $sth = $this->link->prepare($sql);
-        $sth->bindParam(':id', $id, \PDO::PARAM_INT);
-        $sth->execute();
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
         return true;
     } catch (PDOException $e) {
-        error_log("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
+        echo "Erreur" . $e->getMessage();
         return false;
     }
 }

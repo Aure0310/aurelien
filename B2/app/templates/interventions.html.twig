@@ -10,9 +10,9 @@
     {% if role == 'Admin' or role == 'Standardiste' %}
         <h2>Nombre total d'interventions en cours : {{ count_all_interventions_en_cours }}</h2>
     {% elseif role == 'Intervenant' %}
-        <p>Nombre d'interventions vous étant attribuées : {{ count_interventions_en_cours }}</p>
+        <h2>Nombre d'interventions vous étant attribuées : {{ count_interventions_en_cours }}</h2>
     {% else %}
-        <p>Vos demandes d'intervention :</p>
+        <h2>Vos demandes d'intervention :</h2>
     {% endif %}
     <section>
     {% if role == 'Admin' or role == 'Standardiste' %}
@@ -92,7 +92,7 @@
         {% endif %}
     </section>
 
-    <h1>Interventions résolues</h1>
+    <h2>Interventions résolues :</h2>
 
     {% if interventions %}
             <table>
@@ -148,6 +148,6 @@
                 </tbody>
             </table>
         {% else %}
-            <p>Aucune intervention en cours.</p>
+            <p>Aucune intervention.</p>
         {% endif %}
 {% endblock %}
